@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>LBG Calendar Setup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    --bg: #F3F3F0;
+    --surface: #FFFFFF;
+    --surface-2: #F7F7F4;
+    --border: #E2E2DD;
+    --ink: #1C1C19;
+    --muted: #63645D;
+    --eyebrow: #8D8E86;
+    --shadow: 0 1px 2px rgba(20,20,16,0.04), 0 8px 24px rgba(20,20,16,0.05);
+    --radius: 14px;
+
+    --accent-ink: #05643F;
+    --accent-soft: #E4F3EC;
+    --accent-border: #BEE0CE;
+
+    --warn-ink: #A85A17;
+    --warn-soft: #FBF0E1;
+    --warn-border: #E9CFA6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131311;
+      --surface: #1C1C19;
+      --surface-2: #201F1C;
+      --border: #322F29;
+      --ink: #EDEDE8;
+      --muted: #9C9C94;
+      --eyebrow: #7C7C74;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+      --accent-ink: #3FCB9B;
+      --accent-soft: #16281F;
+      --accent-border: #2E4A3A;
+
+      --warn-ink: #E8A461;
+      --warn-soft: #2A2015;
+      --warn-border: #4A3A24;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131311;
+    --surface: #1C1C19;
+    --surface-2: #201F1C;
+    --border: #322F29;
+    --ink: #EDEDE8;
+    --muted: #9C9C94;
+    --eyebrow: #7C7C74;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+    --accent-ink: #3FCB9B;
+    --accent-soft: #16281F;
+    --accent-border: #2E4A3A;
+
+    --warn-ink: #E8A461;
+    --warn-soft: #2A2015;
+    --warn-border: #4A3A24;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 28px 16px 64px;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+  .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .masthead img { height: 26px; width: auto; display: block; }
+  .masthead .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--eyebrow); }
+
+  .title-block h1 { font-family: "Archivo Expanded", "IBM Plex Sans", sans-serif; font-weight: 800; font-size: clamp(26px, 6vw, 36px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance; }
+  .title-block p { margin: 0; color: var(--muted); font-size: 16px; max-width: 58ch; }
+
+  .subhead { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--eyebrow); margin: 2px 0 -4px; }
+
+  .cal-card { border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; border: 1.5px solid var(--accent-border); background: var(--accent-soft); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .cal-card h3 { margin: 0; font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 15px; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.04em; }
+  .cal-card .cal-name { font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 600; padding: 7px 12px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); }
+  .cal-card .groups { margin-left: auto; display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; color: var(--muted); }
+
+  .platform { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .platform-head { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+  .platform-head .icon { font-size: 18px; line-height: 1; }
+  .platform-head h3 { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 16px; margin: 0; }
+  .platform-head .tag { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+
+  .steps { list-style: none; margin: 0; padding: 4px 20px 16px; counter-reset: step; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 26px 1fr; gap: 13px; padding: 10px 0; }
+  .steps li + li { border-top: 1px dashed var(--border); }
+  .steps li::before {
+    content: counter(step);
+    font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 12.5px;
+    color: var(--accent-ink); background: var(--accent-soft); border: 1px solid var(--accent-border);
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .steps .step-body span { color: var(--muted); font-size: 14px; }
+  .steps .step-body code { font-family: "IBM Plex Mono", monospace; font-size: 0.9em; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; }
+
+  .callout { margin: 0 20px 16px; padding: 12px 15px; border-radius: 10px; font-size: 14px; background: var(--warn-soft); border: 1px solid var(--warn-border); }
+  .callout strong { display: block; margin-bottom: 2px; color: var(--warn-ink); }
+
+  .faq { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 4px 20px 6px; }
+  .faq details { border-top: 1px dashed var(--border); padding: 13px 0; }
+  .faq details:first-child { border-top: none; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14.5px; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: "IBM Plex Mono", monospace; color: var(--muted); font-size: 17px; line-height: 1; flex-shrink: 0; }
+  .faq details[open] summary::after { content: "\2212"; }
+  .faq summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  .faq .a { margin: 9px 0 0; color: var(--muted); font-size: 14px; }
+
+  footer { text-align: center; padding-top: 6px; color: var(--muted); font-size: 13.5px; }
+  footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  footer a:hover { border-bottom-color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <img src="av-team-mark.png" alt="AV-Team">
+    <span class="eyebrow">Staff&nbsp;Guide</span>
+  </div>
+
+  <div class="title-block">
+    <h1>LBG Support calendar</h1>
+    <p>Your team calendar is shared, not automatic — add it once in Outlook and it stays there. Steps below for desktop, web, and mobile.</p>
+  </div>
+
+  <div class="cal-card">
+    <h3>Add this calendar</h3>
+    <div class="cal-name">AVT-CALENDAR-LBG-Support</div>
+    <div class="groups">AVT-SG-LBG-Calendar-Users<br>AVT-SG-CALENDAR-LBG-Managers</div>
+  </div>
+
+  <div class="platform">
+    <div class="platform-head"><span class="icon">🖥️</span><h3>Outlook desktop (Windows &amp; Mac)</h3><span class="tag">New Outlook</span></div>
+    <ol class="steps">
+      <li><div class="step-body"><span>Switch to the <strong>Calendar</strong> view (icon in the left rail).</span></div></li>
+      <li><div class="step-body"><span>Click <strong>Add calendar</strong> at the top of the calendar list.</span></div></li>
+      <li><div class="step-body"><span>Choose <strong>Add from directory</strong>.</span></div></li>
+      <li><div class="step-body"><span>Type <code>AVT-CALENDAR-LBG-Support</code> and select it.</span></div></li>
+      <li><div class="step-body"><span>It appears in your calendar list with a coloured checkbox — untick it any time to hide it, it stays added.</span></div></li>
+    </ol>
+    <div class="callout"><strong>Still on classic Outlook?</strong>Home tab → Open Calendar → From Address Book → search the same name → OK. It lands under "Shared Calendars" in the left pane.</div>
+  </div>
+
+  <div class="platform">
+    <div class="platform-head"><span class="icon">🌐</span><h3>Outlook on the web</h3><span class="tag">outlook.office.com</span></div>
+    <ol class="steps">
+      <li><div class="step-body"><span>Sign in at <strong>outlook.office.com</strong> and open the <strong>Calendar</strong> icon in the left rail.</span></div></li>
+      <li><div class="step-body"><span>Click <strong>Add calendar</strong> above your calendar list.</span></div></li>
+      <li><div class="step-body"><span>Choose <strong>Add from directory</strong>, search <code>AVT-CALENDAR-LBG-Support</code>, and select it.</span></div></li>
+    </ol>
+  </div>
+
+  <div class="platform">
+    <div class="platform-head"><span class="icon">📱</span><h3>Outlook Mobile</h3><span class="tag">iOS &amp; Android</span></div>
+    <ol class="steps">
+      <li><div class="step-body"><span>Open the Outlook app and tap the <strong>Calendar</strong> icon at the bottom.</span></div></li>
+      <li><div class="step-body"><span>Tap the <strong>+</strong> in the top corner (or tap your calendar list at the top-left) to <strong>Add calendar</strong>.</span></div></li>
+      <li><div class="step-body"><span>Choose <strong>Add from directory</strong>, search <code>AVT-CALENDAR-LBG-Support</code>, and tap it.</span></div></li>
+      <li><div class="step-body"><span>It joins your calendar list with its own colour — tap it any time to toggle it on or off.</span></div></li>
+    </ol>
+    <div class="callout"><strong>Don't see "Add from directory"?</strong>Update the Outlook app to the latest version from the App Store / Play Store — older versions place it under a slightly different menu.</div>
+  </div>
+
+  <div class="subhead">Common questions</div>
+  <div class="faq">
+    <details><summary>I added it but can't see any events</summary><p class="a">Give it a minute to sync, then pull to refresh (mobile) or restart Outlook. If it's still empty, you may not have permission yet — check with IT.</p></details>
+    <details><summary>Do I need to do this on every device?</summary><p class="a">Yes, once per device/app — adding it in Outlook on your laptop doesn't add it to Outlook Mobile automatically, and vice versa.</p></details>
+    <details><summary>I'm a Manager — do I get anything extra?</summary><p class="a">Same steps to add it. Managers additionally get edit rights on the calendar itself once added, not just view.</p></details>
+  </div>
+
+  <footer>
+    Questions? James Bardell, IT Manager — <a href="mailto:tech@av-team.co.uk">tech@av-team.co.uk</a>
+  </footer>
+
+</div>
+</body>
+</html>
