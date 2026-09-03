@@ -1,34 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVT Master App - Support</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AVT Masterapp Support</title>
+<link rel="icon" href="data:,">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #1b1b1b; }
-  h1 { font-size: 28px; }
-  h2 { font-size: 20px; margin-top: 32px; }
-  a { color: #0d6b3f; }
+  :root {
+    --ground: #FAF9F7;
+    --surface: #FFFFFF;
+    --border: #E4E1DA;
+    --ink: #1C1B19;
+    --ink-soft: #56534C;
+    --ink-faint: #8A867C;
+    --accent: #0B4FCC;
+    --rule: #D8D4CB;
+    --bar-red: #C7372F;
+    --bar-green: #1E7A46;
+    --bar-blue: #0B4FCC;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #17181A;
+      --surface: #1E1F22;
+      --border: #34363A;
+      --ink: #EDEBE6;
+      --ink-soft: #B3B0A8;
+      --ink-faint: #7D7A72;
+      --accent: #6FA0FF;
+      --rule: #3A3C40;
+      --bar-red: #E0655D;
+      --bar-green: #4CA274;
+      --bar-blue: #6FA0FF;
+    }
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap');
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; padding: 56px 24px 96px; }
+
+  .brandbar { display: flex; gap: 4px; width: 56px; margin-bottom: 28px; }
+  .brandbar span { display: block; width: 16px; height: 4px; border-radius: 2px; }
+  .brandbar span:nth-child(1) { background: var(--bar-red); }
+  .brandbar span:nth-child(2) { background: var(--bar-green); }
+  .brandbar span:nth-child(3) { background: var(--bar-blue); }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .meta { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 40px; }
+  .meta strong { color: var(--ink); font-weight: 600; }
+
+  .lede {
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    padding: 20px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 44px;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  section { margin-bottom: 36px; }
+
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2 .num {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: 0;
+  }
+
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  ul { margin: 0 0 14px; padding-left: 20px; color: var(--ink-soft); }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--ink-faint); }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: currentColor; }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    display: grid;
+    gap: 4px;
+  }
+  .contact-card .row { display: flex; gap: 10px; font-size: 14px; }
+  .contact-card .label { color: var(--ink-faint); min-width: 70px; }
+  .contact-card .value { color: var(--ink); font-weight: 500; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 28px; }
+    .page { padding: 40px 18px 72px; }
+  }
 </style>
 </head>
 <body>
-  <h1>AVT Master App - Support</h1>
 
-  <p>AVT Master App is an internal tool for AVT staff, covering Room Check, Warehouse Asset scanning, and related site operations.</p>
+<div class="page">
+  <div class="brandbar"><span></span><span></span><span></span></div>
+  <div class="eyebrow">AV-Team &middot; Resolution Midlands Ltd</div>
+  <h1>Support — AVT Masterapp</h1>
+  <div class="meta">Last updated <strong>3 September 2026</strong></div>
 
-  <h2>Need help?</h2>
-  <p>If you're having trouble signing in, scanning a room or asset, or anything else in the app, contact:</p>
-  <p>James Bardell, IT Manager<br>
-  Resolution Midlands Ltd<br>
-  Email: <a href="mailto:tech@av-team.co.uk">tech@av-team.co.uk</a></p>
+  <div class="lede">
+    <strong>AVT Masterapp is an internal tool</strong> for AVT staff, covering Room Check, Warehouse Asset scanning, and related site operations.
+  </div>
 
-  <h2>Common issues</h2>
-  <ul>
-    <li><strong>Can't sign in:</strong> Make sure you're using your company Microsoft account and have an active internet connection for the first sign-in.</li>
-    <li><strong>Scan Room RFID not working:</strong> Make sure NFC is enabled on your device and you're holding the phone close to the tag.</li>
-    <li><strong>Missing app tiles on the home screen:</strong> Access to each tool is controlled by your Microsoft security group membership. Contact IT if you believe you should have access to something you don't see.</li>
-  </ul>
+  <section>
+    <h2><span class="num">1</span>Need help?</h2>
+    <p>If you're having trouble signing in, scanning a room or asset, or anything else in the app, contact:</p>
+    <div class="contact-card">
+      <div class="row"><span class="label">Company</span><span class="value">Resolution Midlands Ltd (AV-Team)</span></div>
+      <div class="row"><span class="label">Contact</span><span class="value">IT Manager</span></div>
+      <div class="row"><span class="label">Email</span><span class="value"><a href="mailto:tech@av-team.co.uk">tech@av-team.co.uk</a></span></div>
+    </div>
+  </section>
 
-  <p>See also our <a href="privacy.html">Privacy Policy</a>.</p>
+  <section>
+    <h2><span class="num">2</span>Common issues</h2>
+    <ul>
+      <li><strong>Can't sign in</strong> — make sure you're using your company Microsoft account and have an active internet connection for the first sign-in.</li>
+      <li><strong>Scan Room RFID not working</strong> — make sure NFC is enabled on your device and you're holding the phone close to the tag.</li>
+      <li><strong>Missing app tiles on the home screen</strong> — access to each tool is controlled by your Microsoft security group membership. Contact IT if you believe you should have access to something you don't see.</li>
+    </ul>
+  </section>
+
+  <footer>
+    See also our <a href="privacy.html">Privacy Policy</a>.
+  </footer>
+</div>
+
 </body>
 </html>
