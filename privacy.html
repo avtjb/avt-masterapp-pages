@@ -1,46 +1,273 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVT Master App - Privacy Policy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AVT Masterapp Privacy Policy</title>
+<link rel="icon" href="data:,">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #1b1b1b; }
-  h1 { font-size: 28px; }
-  h2 { font-size: 20px; margin-top: 32px; }
-  .updated { color: #666; font-size: 14px; margin-bottom: 32px; }
-  ul { padding-left: 20px; }
-  a { color: #0d6b3f; }
+  :root {
+    --ground: #FAF9F7;
+    --surface: #FFFFFF;
+    --border: #E4E1DA;
+    --ink: #1C1B19;
+    --ink-soft: #56534C;
+    --ink-faint: #8A867C;
+    --accent: #0B4FCC;
+    --rule: #D8D4CB;
+    --bar-red: #C7372F;
+    --bar-green: #1E7A46;
+    --bar-blue: #0B4FCC;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #17181A;
+      --surface: #1E1F22;
+      --border: #34363A;
+      --ink: #EDEBE6;
+      --ink-soft: #B3B0A8;
+      --ink-faint: #7D7A72;
+      --accent: #6FA0FF;
+      --rule: #3A3C40;
+      --bar-red: #E0655D;
+      --bar-green: #4CA274;
+      --bar-blue: #6FA0FF;
+    }
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap');
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  .brandbar {
+    display: flex;
+    gap: 4px;
+    width: 56px;
+    margin-bottom: 28px;
+  }
+  .brandbar span { display: block; width: 16px; height: 4px; border-radius: 2px; }
+  .brandbar span:nth-child(1) { background: var(--bar-red); }
+  .brandbar span:nth-child(2) { background: var(--bar-green); }
+  .brandbar span:nth-child(3) { background: var(--bar-blue); }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .meta {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    margin-bottom: 40px;
+  }
+  .meta strong { color: var(--ink); font-weight: 600; }
+
+  .lede {
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    padding: 20px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 44px;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  section { margin-bottom: 36px; }
+
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2 .num {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 20px 0 6px;
+  }
+
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  ul { margin: 0 0 14px; padding-left: 20px; color: var(--ink-soft); }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--ink-faint); }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: currentColor; }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    display: grid;
+    gap: 4px;
+  }
+  .contact-card .row { display: flex; gap: 10px; font-size: 14px; }
+  .contact-card .label { color: var(--ink-faint); min-width: 70px; }
+  .contact-card .value { color: var(--ink); font-weight: 500; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 28px; }
+    .page { padding: 40px 18px 72px; }
+  }
 </style>
 </head>
 <body>
-  <h1>AVT Master App - Privacy Policy</h1>
-  <p class="updated">Last updated: 12 August 2026</p>
 
-  <p>AVT Master App ("the App") is an internal operational tool developed by Resolution Midlands Ltd ("AVT", "we", "us") for use by our own employees and engineers. It is not intended for use by, or distribution to, the general public.</p>
+<div class="page">
+  <div class="brandbar"><span></span><span></span><span></span></div>
+  <div class="eyebrow">AV-Team &middot; TestFlight Beta</div>
+  <h1>Privacy Policy — AVT Masterapp</h1>
+  <div class="meta">Effective from <strong>3 September 2026</strong> &middot; for TestFlight beta testers of the AVT Masterapp iOS app</div>
 
-  <h2>Information we collect</h2>
-  <ul>
-    <li><strong>Microsoft account information.</strong> The App requires sign-in with your company Microsoft account (via Microsoft Entra ID). We access your name, email address, and security group membership to authenticate you and determine which parts of the App you have permission to use.</li>
-    <li><strong>Location.</strong> With your permission, the App uses your device's location to display local weather on the home screen. Location data is not stored or shared beyond this feature.</li>
-    <li><strong>Camera and photo library.</strong> The App uses the camera to scan barcodes and capture photos of equipment and rooms, and can access your photo library to attach existing photos to equipment or room records. Photos you capture or select are uploaded to our company Microsoft SharePoint environment as part of your work records.</li>
-    <li><strong>NFC/RFID.</strong> The App uses your device's NFC reader to scan RFID tags on rooms and equipment, used to identify records within the App. No personal data is stored on or read from the tags themselves.</li>
-    <li><strong>Microphone.</strong> The App requests microphone permission only because it is required by the underlying camera-scanning library; the App does not record or use audio.</li>
-  </ul>
+  <div class="lede">
+    <strong>You're testing AVT Masterapp through TestFlight</strong> — an internal tool built for AV-Team engineers and staff, not available to the general public. This policy explains what the app does with your information while you're beta testing it, and what Apple's TestFlight platform itself collects on top of that.
+  </div>
 
-  <h2>How we use this information</h2>
-  <p>All data collected through the App is used solely to operate AVT's internal room-check, equipment-tracking, and asset-management processes for our clients. Data is stored within our organisation's Microsoft 365 / SharePoint environment and is not sold, rented, or shared with third parties outside of the Microsoft services we use to run the App.</p>
+  <section>
+    <h2><span class="num">1</span>Who this policy covers</h2>
+    <p>This policy is issued by Resolution Midlands Ltd ("the Company", "we", "us") and covers anyone using AVT Masterapp as a TestFlight beta tester — an AV-Team employee, an approved contractor, or (for App Store review purposes) an Apple reviewer using a demo account.</p>
+  </section>
 
-  <h2>Data retention</h2>
-  <p>Data collected through the App is retained in accordance with AVT's internal data retention policies and our contractual obligations to our clients.</p>
+  <section>
+    <h2><span class="num">2</span>What the app does</h2>
+    <p>AVT Masterapp is a launcher for a small number of internal work modules. What you see depends on which security groups your Microsoft 365 account belongs to:</p>
+    <ul>
+      <li><strong>LBG Room Checker</strong> — meeting room AV equipment inspections, fault logging with photos, and RFID/NFC tag assignment for room identification.</li>
+      <li><strong>Warehouse Asset</strong> — scanning and tracking warehouse assets and equipment.</li>
+      <li><strong>Holiday Request</strong> — submitting annual, sick, or unpaid leave requests and viewing manager approval status.</li>
+    </ul>
+    <p>The Launcher's Apps screen also shows local weather, using your device's approximate location.</p>
+  </section>
 
-  <h2>Your rights</h2>
-  <p>As the App is used by our own employees in the course of their employment, any requests relating to personal data collected through the App should be directed to your line manager or the contact below.</p>
+  <section>
+    <h2><span class="num">3</span>Information we collect</h2>
+    <h3>Your account identity</h3>
+    <p>The app signs in using your AV-Team Microsoft 365 account. We receive your name, email address, and which internal security groups you belong to — this determines what the app shows you. We never see or store your password; sign-in is handled directly by Microsoft.</p>
+    <h3>What you enter or capture in the app</h3>
+    <ul>
+      <li>Room inspection results, fault descriptions, and photos you take or attach of equipment (LBG Room Checker)</li>
+      <li>RFID/NFC tag identifiers read when assigning a tag to a room</li>
+      <li>Asset scan records (Warehouse Asset)</li>
+      <li>Leave dates, leave type, and any notes you enter (Holiday Request)</li>
+    </ul>
+    <h3>Device permissions</h3>
+    <ul>
+      <li><strong>Camera</strong> — to scan barcodes and capture photos of rooms and equipment.</li>
+      <li><strong>Photo library</strong> — to attach existing photos to a record, and to save photos you've captured back to your library.</li>
+      <li><strong>NFC</strong> — to read RFID tags on rooms and equipment.</li>
+      <li><strong>Location (when in use)</strong> — to show local weather on the Apps screen. Not used for any other purpose, and not attached to anything you submit.</li>
+      <li><strong>Microphone</strong> — requested only because it's required by the underlying camera-scanning library; the app does not record or use audio.</li>
+    </ul>
+    <p>Each permission is used only when you actively use the relevant feature — nothing is captured in the background.</p>
+  </section>
 
-  <h2>Contact us</h2>
-  <p>If you have any questions about this privacy policy, contact:</p>
-  <p>James Bardell, IT Manager<br>
-  Resolution Midlands Ltd<br>
-  <a href="mailto:tech@av-team.co.uk">tech@av-team.co.uk</a></p>
+  <section>
+    <h2><span class="num">4</span>How we use it</h2>
+    <p>Information is used only to operate the features described above — for example, so a fault you log is visible to whoever schedules the repair, or so your manager can approve your leave request. We do not use your information for advertising, and the app does not include any third-party analytics or advertising SDKs.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span>Where your data is stored</h2>
+    <p>App data is stored in the Company's own Microsoft 365 / SharePoint Online environment — it does not pass through or get stored on any third-party server we operate. The app itself is distributed via TestFlight, which is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's own privacy policy</a>.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">6</span>What TestFlight itself collects</h2>
+    <p>Separately from anything AVT Masterapp does, Apple's TestFlight platform collects its own usage and diagnostic data from beta testers — for example crash logs and, if you choose to send one, your written feedback on a build. This is collected and controlled by Apple, not by us; see Apple's privacy policy for details on how they handle it.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">7</span>Who can see it</h2>
+    <p>Only AV-Team staff with appropriate access to the relevant SharePoint site can see the data you enter — access follows the same internal security groups that control what you see in the app. For App Store review purposes, a dedicated demo account with sample data may be provided to Apple's review team; this account is separate from real staff data.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">8</span>Your rights</h2>
+    <p>As a UK-based Company, we handle personal data in line with UK GDPR. You can ask to see what's held about you, ask for it to be corrected, or ask questions about how long it's kept — contact IT using the details below. Leave and sickness records are also subject to the Company's normal HR data retention policies.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">9</span>Changes to this policy</h2>
+    <p>We may update this policy as the app or the beta program changes. The effective date at the top of the page will always reflect the most recent version.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">10</span>Contact</h2>
+    <div class="contact-card">
+      <div class="row"><span class="label">Company</span><span class="value">Resolution Midlands Ltd (AV-Team)</span></div>
+      <div class="row"><span class="label">Contact</span><span class="value">IT Manager</span></div>
+      <div class="row"><span class="label">Email</span><span class="value">tech@av-team.co.uk</span></div>
+    </div>
+  </section>
+
+  <footer>
+    This policy covers AVT Masterapp as distributed through TestFlight for beta testing only.
+  </footer>
+</div>
+
 </body>
 </html>
