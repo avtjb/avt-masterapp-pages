@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>AVT Master App — Release Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    --bg: #F3F3F0;
+    --surface: #FFFFFF;
+    --surface-2: #F7F7F4;
+    --border: #E2E2DD;
+    --ink: #1C1C19;
+    --muted: #63645D;
+    --eyebrow: #8D8E86;
+    --shadow: 0 1px 2px rgba(20,20,16,0.04), 0 8px 24px rgba(20,20,16,0.05);
+    --radius: 14px;
+
+    --rc-ink: #05643F;
+    --rc-soft: #E4F3EC;
+    --rc-border: #BEE0CE;
+
+    --wh-ink: #0B4FCC;
+    --wh-soft: #E7EEFC;
+    --wh-border: #C4D6F7;
+
+    --hol-ink: #A85A17;
+    --hol-soft: #FDEEE0;
+    --hol-border: #F1CFA4;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131311;
+      --surface: #1C1C19;
+      --surface-2: #201F1C;
+      --border: #322F29;
+      --ink: #EDEDE8;
+      --muted: #9C9C94;
+      --eyebrow: #7C7C74;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+      --rc-ink: #3FCB9B;
+      --rc-soft: #16281F;
+      --rc-border: #2E4A3A;
+
+      --wh-ink: #6E9CF2;
+      --wh-soft: #172038;
+      --wh-border: #2E3E5E;
+
+      --hol-ink: #E8A461;
+      --hol-soft: #2A2015;
+      --hol-border: #4A3A24;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131311;
+    --surface: #1C1C19;
+    --surface-2: #201F1C;
+    --border: #322F29;
+    --ink: #EDEDE8;
+    --muted: #9C9C94;
+    --eyebrow: #7C7C74;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+    --rc-ink: #3FCB9B;
+    --rc-soft: #16281F;
+    --rc-border: #2E4A3A;
+
+    --wh-ink: #6E9CF2;
+    --wh-soft: #172038;
+    --wh-border: #2E3E5E;
+
+    --hol-ink: #E8A461;
+    --hol-soft: #2A2015;
+    --hol-border: #4A3A24;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 28px 16px 64px;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
+
+  .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .masthead img { height: 26px; width: auto; display: block; }
+  .masthead .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--eyebrow); }
+
+  .title-block h1 { font-family: "Archivo Expanded", "IBM Plex Sans", sans-serif; font-weight: 800; font-size: clamp(26px, 6vw, 36px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance; color: var(--ink); }
+  .title-block p { margin: 0; color: var(--muted); font-size: 16px; max-width: 58ch; }
+
+  .timeline { display: flex; flex-direction: column; gap: 4px; }
+
+  .entry { display: grid; grid-template-columns: 108px 1fr; gap: 18px; padding: 18px 0; border-top: 1px dashed var(--border); }
+  .entry:first-child { border-top: none; }
+  @media (max-width: 480px) { .entry { grid-template-columns: 1fr; gap: 6px; } }
+
+  .entry .date { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: var(--eyebrow); padding-top: 2px; white-space: nowrap; }
+
+  .entry .body ul { margin: 0; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 6px; }
+  .entry .body li { font-size: 14.5px; }
+  .entry .body li::marker { color: var(--muted); }
+
+  .tag { display: inline-flex; align-items: center; font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; margin-right: 6px; position: relative; top: -1px; }
+  .tag-rc { color: var(--rc-ink); background: var(--rc-soft); border: 1px solid var(--rc-border); }
+  .tag-hol { color: var(--hol-ink); background: var(--hol-soft); border: 1px solid var(--hol-border); }
+  .tag-wh { color: var(--wh-ink); background: var(--wh-soft); border: 1px solid var(--wh-border); }
+  .tag-app { color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
+
+  footer { text-align: center; padding-top: 6px; color: var(--muted); font-size: 13.5px; }
+  footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  footer a:hover { border-bottom-color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <img src="av-team-mark.png" alt="AV-Team">
+    <span class="eyebrow">Release&nbsp;Notes</span>
+  </div>
+
+  <div class="title-block">
+    <h1>What's New</h1>
+    <p>A quick, plain-English log of what's changed in the app over time — newest first. For step-by-step help, see the <a href="help.html" style="color:var(--ink)">Full App Guide</a>.</p>
+  </div>
+
+  <div class="timeline">
+
+    <div class="entry">
+      <div class="date">8 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-rc">Room Checker</span>Fault notes now save your edits properly and get a date/time stamp when updated.</li>
+          <li><span class="tag tag-rc">Room Checker</span>Checklist items renamed for consistency (e.g. "Camera operational").</li>
+          <li><span class="tag tag-rc">Room Checker</span>Clear Fault screen relabelled and given a bigger notes box.</li>
+          <li><span class="tag tag-hol">Holiday Request</span>Request cards are now collapsible — tap to see approval details.</li>
+          <li><span class="tag tag-hol">Holiday Request</span>Notification emails now come from a dedicated Holiday Request mailbox.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">7–8 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-rc">Room Checker</span>Open faults are now automatically detected and pre-filled when you re-check a room, and each fault gets its own tracking number.</li>
+          <li><span class="tag tag-rc">Room Checker</span>Fixed a fault's "reported" date resetting every time the room was re-checked.</li>
+          <li><span class="tag tag-rc">Room Checker</span>Fixed Report Fault sometimes creating duplicate entries for the same ongoing issue.</li>
+          <li><span class="tag tag-rc">Room Checker</span>A passing check no longer auto-clears an unrelated open fault — only Clear Fault does. Added "Replacement" as a resolution type.</li>
+          <li><span class="tag tag-rc">Room Checker</span>Fault-resolved emails now show who resolved it and how.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">7 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-rc">Room Checker</span>Equipment tracking now records firmware version and last-checked date per unit.</li>
+          <li><span class="tag tag-rc">Room Checker</span>New Coverage tab for managers to reassign site cover (e.g. for sickness).</li>
+          <li><span class="tag tag-rc">Room Checker</span>RFID tag placement guidance added to the Help Guide, with a reminder before scanning a room with no tag yet.</li>
+          <li><span class="tag tag-rc">Room Checker</span>Various fixes to room matching and site-coverage lookups.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">5–6 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-rc">Room Checker</span>Fault photos, room photos, and in-progress checklists now survive an app or phone restart instead of being lost.</li>
+          <li><span class="tag tag-rc">Room Checker</span>New "Faults on your site" panel for site owners and backups, with a clear offline/pending-sync indicator.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">1–5 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-rc">Room Checker</span>Added a Report Fault tab for logging an issue without doing a full inspection, and a Clear Fault button with a full resolution record.</li>
+          <li><span class="tag tag-app">App-wide</span>Push notifications added for fault alerts and holiday request updates.</li>
+          <li><span class="tag tag-hol">Holiday Request</span>Live holiday balance display, and a single calendar picker for date ranges.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">23 Aug – 1 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-hol">Holiday Request</span>Module added — submit, track, and cancel leave requests, routed through manager approval.</li>
+          <li><span class="tag tag-rc">Room Checker</span>Room Photos, Previous Faults, and Equipment Update features added and improved.</li>
+          <li><span class="tag tag-app">App-wide</span>Launcher redesigned with proper icons and dark-mode fixes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">Before 23 Aug 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-app">App-wide</span>Initial build: Microsoft sign-in, LBG Room Checker (RFID scanning, equipment checklist, room photos, fault logging), and the Warehouse Asset module.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Questions? — <a href="mailto:tech@av-team.co.uk">tech@av-team.co.uk</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
