@@ -176,14 +176,16 @@
   .masthead img { height: 26px; width: auto; display: block; }
   .masthead .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--eyebrow); }
 
-  /* Logo wordmark is white text -- swap to the dark-text variant on a light background */
-  .logo-dark { display: none; }
+  /* Logo wordmark is white text -- swap to the dark-text variant on a light background.
+     Selector must be at least as specific as ".masthead img" above, or that rule's
+     own display:block wins regardless of source order. */
+  .masthead img.logo-dark { display: none; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .logo-light { display: none; }
-    :root:not([data-theme="light"]) .logo-dark { display: block; }
+    :root:not([data-theme="light"]) .masthead img.logo-light { display: none; }
+    :root:not([data-theme="light"]) .masthead img.logo-dark { display: block; }
   }
-  :root[data-theme="dark"] .logo-light { display: none; }
-  :root[data-theme="dark"] .logo-dark { display: block; }
+  :root[data-theme="dark"] .masthead img.logo-light { display: none; }
+  :root[data-theme="dark"] .masthead img.logo-dark { display: block; }
 
   .title-block h1 { font-family: "Archivo Expanded", "IBM Plex Sans", sans-serif; font-weight: 800; font-size: clamp(26px, 6vw, 36px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance; color: var(--ink); }
   .title-block p { margin: 0; color: var(--muted); font-size: 16px; max-width: 58ch; }
