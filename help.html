@@ -176,6 +176,15 @@
   .masthead img { height: 26px; width: auto; display: block; }
   .masthead .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--eyebrow); }
 
+  /* Logo wordmark is white text -- swap to the dark-text variant on a light background */
+  .logo-dark { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .logo-light { display: none; }
+    :root:not([data-theme="light"]) .logo-dark { display: block; }
+  }
+  :root[data-theme="dark"] .logo-light { display: none; }
+  :root[data-theme="dark"] .logo-dark { display: block; }
+
   .title-block h1 { font-family: "Archivo Expanded", "IBM Plex Sans", sans-serif; font-weight: 800; font-size: clamp(26px, 6vw, 36px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance; color: var(--ink); }
   .title-block p { margin: 0; color: var(--muted); font-size: 16px; max-width: 58ch; }
 
@@ -298,7 +307,8 @@
 <div class="page">
 
   <div class="masthead">
-    <img src="av-team-mark.png" alt="AV-Team">
+    <img class="logo-light" src="av-team-mark-onlight.png" alt="AV-Team">
+    <img class="logo-dark" src="av-team-mark.png" alt="AV-Team">
     <span class="eyebrow">Staff&nbsp;Guide</span>
   </div>
 
