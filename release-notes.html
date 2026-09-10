@@ -166,7 +166,7 @@
           <li><span class="tag tag-rc">LBG - Room Checker</span>Room checks now record whether the room was opened via an RFID/NFC tap or a manual search.</li>
           <li><span class="tag tag-app">AVT - App-wide</span>Fixed a bug where sign-in could hang indefinitely on a slow or unreliable network — it now fails gracefully after a short wait so you can just try again.</li>
           <li><span class="tag tag-hol">AVT - Holiday Request</span>Strengthened how your balance check verifies who's asking — now checked directly against your Microsoft sign-in rather than a submitted address.</li>
-          <li><span class="tag tag-hol">AVT - Holiday Request</span>If you saw "Couldn't check your entitlement" after the update above: we're still tracking down the root cause. This update widens how long it waits before giving up and adds logging to help pin it down — if it happens again, please let us know what network you were on (WiFi/cellular/VPN).</li>
+          <li><span class="tag tag-hol">AVT - Holiday Request</span>Fixed the "Couldn't check your entitlement" error some of you saw after the security update above — the fix itself was sound, but it was sending its proof-of-sign-in in a way our platform's own gateway quietly intercepted before it ever reached our system. It now goes through correctly. Sorry for the trouble — please let us know if you still see it.</li>
         </ul>
       </div>
     </div>
