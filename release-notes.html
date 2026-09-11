@@ -160,6 +160,12 @@
           <li><span class="tag tag-rc">LBG - Room Checker</span>Fixed a bug where a room check could look like it hadn't saved and, in rare cases, get submitted twice — the save itself was always working correctly, but the app's own local display of it could fall out of sync. It now recovers gracefully instead of re-submitting.</li>
           <li><span class="tag tag-rc">LBG - Room Checker</span>Changing a checklist item back to Pass after marking it Fault now asks how it was resolved — including when using Swift Pass, if any item being cleared was a genuine fault.</li>
           <li><span class="tag tag-hol">AVT - Holiday Request</span>Strengthened how viewing, submitting, and cancelling requests verifies who's asking too — now checked directly against your Microsoft sign-in, same as the balance check.</li>
+          <li><span class="tag tag-hol">AVT - Holiday Request</span>Fixed "Cancel failed [object Object]" and a couple of related error messages on the Cancel Request path so they now show the real reason.</li>
+          <li><span class="tag tag-hol">AVT - Holiday Request</span>Removed Sick Leave from the list of leave types you can request — it doesn't go through the same approval process as Annual/Unpaid Leave, so requesting it here was never the right path. Your Sick day balance still shows as before.</li>
+          <li><span class="tag tag-hol">AVT - Holiday Request</span>My Requests is now split into Pending, Approved, Cancelled and Rejected sections, each sorted with the earliest date first.</li>
+          <li><span class="tag tag-hol">AVT - Holiday Request</span>The holiday year (1 April – 31 March) now shows in the title area, alongside your entitlement.</li>
+          <li><span class="tag tag-app">AVT - App-wide</span>Added a link back to Master Apps at the top of the Holiday Request web page.</li>
+          <li><span class="tag tag-app">AVT - App-wide</span>The web apps now try to reuse your existing Microsoft sign-in automatically, so moving between Master Apps modules on the web needs less repeated signing in. Fixed a bug in this where the page could briefly sit on a blank screen while that check ran.</li>
         </ul>
       </div>
     </div>
