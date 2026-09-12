@@ -30,6 +30,10 @@
     --hol-ink: #A85A17;
     --hol-soft: #FDEEE0;
     --hol-border: #F1CFA4;
+
+    --sm-ink: #6E3FA3;
+    --sm-soft: #F1E9FA;
+    --sm-border: #DCC4F0;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -54,6 +58,10 @@
       --hol-ink: #E8A461;
       --hol-soft: #2A2015;
       --hol-border: #4A3A24;
+
+      --sm-ink: #C79BF0;
+      --sm-soft: #241A30;
+      --sm-border: #3E2C52;
     }
   }
   :root[data-theme="dark"] {
@@ -77,6 +85,10 @@
     --hol-ink: #E8A461;
     --hol-soft: #2A2015;
     --hol-border: #4A3A24;
+
+    --sm-ink: #C79BF0;
+    --sm-soft: #241A30;
+    --sm-border: #3E2C52;
   }
 
   * { box-sizing: border-box; }
@@ -129,6 +141,7 @@
   .tag-hol { color: var(--hol-ink); background: var(--hol-soft); border: 1px solid var(--hol-border); }
   .tag-wh { color: var(--wh-ink); background: var(--wh-soft); border: 1px solid var(--wh-border); }
   .tag-app { color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
+  .tag-sm { color: var(--sm-ink); background: var(--sm-soft); border: 1px solid var(--sm-border); }
 
   footer { text-align: center; padding-top: 6px; color: var(--muted); font-size: 13.5px; }
   footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
@@ -151,6 +164,19 @@
   </div>
 
   <div class="timeline">
+
+    <div class="entry">
+      <div class="date">12 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-sm">LBG - Site Management</span>New browser-based dashboard for site managers — no app install needed. See room status and open issues across the whole estate, manage site coverage, and report faults, all in one place.</li>
+          <li><span class="tag tag-sm">LBG - Site Management</span>The Overview tab groups rooms by building — tap a building to expand it, use the search box to jump straight to a room, and each building's rooms are sorted alphabetically and split into Hubs, MTRs, Event Spaces, and Other.</li>
+          <li><span class="tag tag-sm">LBG - Site Management</span>Open Issues are grouped by building too — tap any issue to open that room's full details and clear the fault from there.</li>
+          <li><span class="tag tag-sm">LBG - Site Management</span>Coverage and Report Fault now only appear for managers, rather than showing to everyone.</li>
+          <li><span class="tag tag-sm">LBG - Site Management</span>Added a note on Open Issues that newly granted manager access can take a few minutes to show up.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="entry">
       <div class="date">10 Sep 2026</div>
