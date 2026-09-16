@@ -166,6 +166,18 @@
   <div class="timeline">
 
     <div class="entry">
+      <div class="date">16 Sep 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>TestFlight build 166: on a site that has moved to the new database (Birmingham for now), the room details screen has a new <em>Room in use, unable to check</em> button. One tap, an optional note, and the visit is recorded without counting as a check &mdash; the room stays on the overdue list until it is actually checked, but the attempt shows on the website and in the daily report so nobody thinks it was skipped. Works offline and syncs later.</li>
+          <li><span class="tag tag-sm">LBG - Site Management</span>A room found in use on its last visit now shows as its own grey status, <em>Unable to check</em>, on the Overview row, in the room panel, in the summary tile and on both printable reports. The last-checked date stays the real last check.</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>Fixed: the Computacenter fault-email intake had never been able to create a fault for an email it matched to a room, because of a formatting bug in one step. Corrected on the new-database version of the flow; the first matched email after this will create its fault as intended.</li>
+          <li><span class="tag tag-app">AVT - App-wide</span>TestFlight builds 162 to 165: the app now declares its launch screen (the App Store had started rejecting uploads without one) and shows the AVT lettermark on black while it opens.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
       <div class="date">15 Sep 2026</div>
       <div class="body">
         <ul>
