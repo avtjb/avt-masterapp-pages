@@ -169,6 +169,9 @@
       <div class="date">17 Sep 2026</div>
       <div class="body">
         <ul>
+          <li><span class="tag tag-sm">LBG - Site Management</span>Clearing a fault from the site on a SharePoint site now also writes the room's <em>Resolved</em> history record, as the app, the Dataverse sites and the deactivation auto-resolve already did, so the room's Previous Faults list and the reports can see the clear. (Being applied to the live Clear Fault flow.)</li>
+          <li><span class="tag tag-sm">LBG - Site Management</span>Fixed for Dataverse sites: after a room was renumbered, its open faults still carried the old room code, so the room stayed green on the estate view and the Open Issues tab could not tie the fault to its room. Faults are now matched on the room's current code, with the old code as a fallback. (Being applied to the live Estate Overview flow.)</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>SharePoint sites: the Fault Resolved email now shows <em>n/a</em> where a fault has no Computacenter or LBG reference instead of leaving the line blank, and a fault that comes back after being fixed will raise a new <em>Fault Reopened</em> email (until now a returning fault reused its old record and sent nothing, and its next resolution email was lost too). The reopened alert switches on once a new marker column is added to the LBG Room Issues list; the next app build resets the markers when a fault comes back.</li>
           <li><span class="tag tag-rc">LBG - Room Checker</span>Next TestFlight build, SharePoint sites: a check that has to be retried after a partial failure no longer records the same inspection twice in the room's history. Nothing changes on screen.</li>
         </ul>
       </div>
