@@ -368,6 +368,48 @@
         <p>Photos won't upload? Check you're online and the Fault Photos library is reachable.</p>
       </div>
     </div>
+
+    <div class="subhead">Site Management — the manager web app</div>
+    <p class="module-intro" style="margin-top:-6px;">A separate browser tool for managers — the whole estate at a glance, every open fault, fault reporting, engineer coverage, bulk imports, and who receives the automatic report emails.</p>
+
+    <div class="flow">
+      <p><strong>How it's organised.</strong> Every room sits under a site and a building. Within a building, rooms are grouped by room type — Hubs, MTRs, GECs, GEC with IPTV, IPTV, Event Spaces, Research Labs, Executive, Boardrooms, Standard, Huddle and Training.</p>
+      <p><strong>On a room's own page:</strong> <strong>Room Notes</strong> — free-text notes anyone can add, edit or clear. <strong>Room Photos</strong> — the room's reference photos plus every Event Kit photo taken at a check. <strong>Previous Faults</strong> — the full fault/resolution history for this room. <strong>Room in use / unable to check</strong> — mark a visit as blocked instead of checked; only available while the room has an open fault.</p>
+    </div>
+
+    <div class="statuses">
+      <div class="status-card"><span class="chip" style="color:var(--st-rejected-ink);background:var(--st-rejected-soft);border:1px solid var(--st-rejected-border)">Red</span><p>An open fault on this room right now.</p></div>
+      <div class="status-card"><span class="chip" style="color:var(--st-cancelled-ink);background:var(--st-cancelled-soft);border:1px solid var(--st-cancelled-border)">Blocked</span><p>The room was in use and couldn't be checked.</p></div>
+      <div class="status-card"><span class="chip" style="color:var(--st-pending-ink);background:var(--st-pending-soft);border:1px solid var(--st-pending-border)">Amber</span><p>Overdue for its check frequency.</p></div>
+      <div class="status-card"><span class="chip" style="color:var(--st-approved-ink);background:var(--st-approved-soft);border:1px solid var(--st-approved-border)">Green</span><p>Checked, on schedule, no open fault.</p></div>
+    </div>
+
+    <div class="cardset">
+      <div class="refcard">
+        <h3>Overview</h3>
+        <p>The whole estate, grouped by site and building, with search and a status filter. Everyone.</p>
+      </div>
+      <div class="refcard">
+        <h3>Open Issues</h3>
+        <p>Every room with a fault right now, across every site. Everyone.</p>
+      </div>
+      <div class="refcard">
+        <h3>Report Fault</h3>
+        <p>Log a new fault against a room. Managers.</p>
+      </div>
+      <div class="refcard">
+        <h3>Coverage</h3>
+        <p>Who's covering which site. Managers.</p>
+      </div>
+      <div class="refcard">
+        <h3>Import</h3>
+        <p>Bulk-add or update rooms from a spreadsheet. Managers.</p>
+      </div>
+      <div class="refcard">
+        <h3>Recipients</h3>
+        <p>Who gets the daily/weekly/monthly report emails. Managers.</p>
+      </div>
+    </div>
   </section>
 
   <hr class="rule">
