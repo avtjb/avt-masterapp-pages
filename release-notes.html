@@ -175,6 +175,8 @@
           <li><span class="tag tag-sm">LBG - Site Management</span>New room type: <em>XL</em>, alongside the existing set. Same inspection checklist and photo slots as MTR/GEC/Other.</li>
           <li><span class="tag tag-rc">LBG - Room Checker</span>Fixed: the daily, weekly and monthly reports could fail silently and not go out at all, and separately could include rooms from AVT's own internal test site. Both are fixed; reports also now include every room regardless of whether it's still active.</li>
           <li><span class="tag tag-app">AVT - App-wide</span>Behind the scenes: a new automated check now watches the estate's key automations every 20 minutes and flags one that's failed or gone quiet, so a problem like the report issue above is caught within minutes instead of days. New manager-only <em>Flow Health</em> tab on the LBG Site Management website shows the result.</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>The daily, weekly and monthly reports now go out at 6pm instead of midday, covering the 24 hours from 6pm the day before.</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>The "Still open" figure on these reports now matches the live count shown on the LBG Site Management website &mdash; it used to only count faults found within that report's own period, which could read differently from the website's always-current total.</li>
         </ul>
       </div>
     </div>
