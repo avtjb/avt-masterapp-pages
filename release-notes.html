@@ -171,6 +171,10 @@
         <ul>
           <li><span class="tag tag-rc">LBG - Room Checker</span><em>Notes on your site(s)</em> refreshes faster &mdash; it now only fetches notes for the sites you actually cover, instead of every note ever written across the whole estate.</li>
           <li><span class="tag tag-rc">LBG - Room Checker</span>Deleting a Room Note now shows a spinner on that note while it's being removed, so it's clear the tap registered.</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>A room with no photos recorded yet now shows a banner on its details screen with a one-tap route into Room Photos &mdash; a nudge, not a requirement; you can still complete and submit an inspection either way.</li>
+          <li><span class="tag tag-sm">LBG - Site Management</span>New room type: <em>XL</em>, alongside the existing set. Same inspection checklist and photo slots as MTR/GEC/Other.</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>Fixed: the daily, weekly and monthly reports could fail silently and not go out at all, and separately could include rooms from AVT's own internal test site. Both are fixed; reports also now include every room regardless of whether it's still active.</li>
+          <li><span class="tag tag-app">AVT - App-wide</span>Behind the scenes: a new automated check now watches the estate's key automations every 20 minutes and flags one that's failed or gone quiet, so a problem like the report issue above is caught within minutes instead of days. New manager-only <em>Flow Health</em> tab on the LBG Site Management website shows the result.</li>
         </ul>
       </div>
     </div>
