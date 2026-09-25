@@ -171,6 +171,8 @@
         <ul>
           <li><span class="tag tag-rc">LBG - Room Checker</span>Fault Resolved emails: if one inspection clears more than one fault, you'll now get a single email listing all of them instead of a separate email per fault &mdash; the same change made to Fault Logged emails on 23 Sep, now on the resolve side too.</li>
           <li><span class="tag tag-rc">LBG - Room Checker</span>Fixed: the change above briefly broke Fault Resolved emails for ordinary single resolutions (Clear Fault, Shoulder Tap) too, not just grouped ones. Caught and fixed the same day &mdash; one email was delayed a couple of hours, nothing was lost.</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>Fixed: the Fault Resolved email's "Device" line could show a different, less specific description than the Fault Logged email for the exact same fault. It now shows the same Device and Failed check detail both emails always had, side by side.</li>
+          <li><span class="tag tag-rc">LBG - Room Checker</span>The two automatic replies Computacenter gets when reporting or re-quoting a fault ("this has been logged as&hellip;" / "this is already being tracked as&hellip;") are now styled to match every other alert this estate sends, instead of plain text.</li>
         </ul>
       </div>
     </div>
