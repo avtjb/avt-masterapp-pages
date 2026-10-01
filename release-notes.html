@@ -34,6 +34,10 @@
     --sm-ink: #6E3FA3;
     --sm-soft: #F1E9FA;
     --sm-border: #DCC4F0;
+
+    --ot-ink: #0C6B63;
+    --ot-soft: #E1F4F1;
+    --ot-border: #BFE0DA;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -62,6 +66,10 @@
       --sm-ink: #C79BF0;
       --sm-soft: #241A30;
       --sm-border: #3E2C52;
+
+      --ot-ink: #3FCFC0;
+      --ot-soft: #16302C;
+      --ot-border: #2E4A45;
     }
   }
   :root[data-theme="dark"] {
@@ -89,6 +97,10 @@
     --sm-ink: #C79BF0;
     --sm-soft: #241A30;
     --sm-border: #3E2C52;
+
+    --ot-ink: #3FCFC0;
+    --ot-soft: #16302C;
+    --ot-border: #2E4A45;
   }
 
   * { box-sizing: border-box; }
@@ -142,6 +154,7 @@
   .tag-wh { color: var(--wh-ink); background: var(--wh-soft); border: 1px solid var(--wh-border); }
   .tag-app { color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
   .tag-sm { color: var(--sm-ink); background: var(--sm-soft); border: 1px solid var(--sm-border); }
+  .tag-ot { color: var(--ot-ink); background: var(--ot-soft); border: 1px solid var(--ot-border); }
 
   footer { text-align: center; padding-top: 6px; color: var(--muted); font-size: 13.5px; }
   footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
@@ -164,6 +177,15 @@
   </div>
 
   <div class="timeline">
+
+    <div class="entry">
+      <div class="date">1 Oct 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-ot">Overtime Claiming</span>New: a way to log overtime hours worked &mdash; including weekends &mdash; pick the date from a calendar and your start and end time, and the hours are worked out for you automatically. Your manager approves or rejects it from Teams or Outlook, and payroll is notified once it's approved. Not switched on for everyone yet &mdash; you'll see an Overtime tile once it's rolled out to your team.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="entry">
       <div class="date">30 Sep 2026</div>
