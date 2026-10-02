@@ -38,6 +38,10 @@
     --ot-ink: #0C6B63;
     --ot-soft: #E1F4F1;
     --ot-border: #BFE0DA;
+
+    --cet-ink: #A3274F;
+    --cet-soft: #FBE8EE;
+    --cet-border: #F0C4D2;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -70,6 +74,10 @@
       --ot-ink: #3FCFC0;
       --ot-soft: #16302C;
       --ot-border: #2E4A45;
+
+      --cet-ink: #F08AA8;
+      --cet-soft: #2D1A21;
+      --cet-border: #4F2C38;
     }
   }
   :root[data-theme="dark"] {
@@ -101,6 +109,10 @@
     --ot-ink: #3FCFC0;
     --ot-soft: #16302C;
     --ot-border: #2E4A45;
+
+    --cet-ink: #F08AA8;
+    --cet-soft: #2D1A21;
+    --cet-border: #4F2C38;
   }
 
   * { box-sizing: border-box; }
@@ -155,6 +167,7 @@
   .tag-app { color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
   .tag-sm { color: var(--sm-ink); background: var(--sm-soft); border: 1px solid var(--sm-border); }
   .tag-ot { color: var(--ot-ink); background: var(--ot-soft); border: 1px solid var(--ot-border); }
+  .tag-cet { color: var(--cet-ink); background: var(--cet-soft); border: 1px solid var(--cet-border); }
 
   footer { text-align: center; padding-top: 6px; color: var(--muted); font-size: 13.5px; }
   footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
@@ -177,6 +190,18 @@
   </div>
 
   <div class="timeline">
+
+    <div class="entry">
+      <div class="date">2 Oct 2026</div>
+      <div class="body">
+        <ul>
+          <li><span class="tag tag-cet">Contract Expiration Tracking</span>New: a web app for keeping track of companies' support contracts and when they expire, all in one place, instead of a spreadsheet. Its Dashboard shows how many contracts have expired or fall due in the next 30 days, in 31 to 90 days, or later (or have no date), with a 12-month chart of when they expire &mdash; tap or click a number or a month to see just those contracts. It works in your phone's web browser and on a widescreen monitor. Only people who have been given access can use it &mdash; you'll see a Contract Expiration Tracking tile on the Master Apps website once you've been given access.</li>
+          <li><span class="tag tag-cet">Contract Expiration Tracking</span>You can add a contract straight from the Dashboard: pick the company (or create one first), fill in the details, and use "Save and add another" to enter several in a row. Each company also keeps its own contacts, locations and documents, plus an account manager and a primary contact. Documents can be uploaded, and each one has a Download button that saves a copy to your device; PDFs and pictures (PNG, JPEG, GIF and WebP) also have an Open button that shows them in a new browser tab.</li>
+          <li><span class="tag tag-cet">Contract Expiration Tracking</span>Dates use the UK format (DD/MM/YYYY): type a start or expiration date, or pick it from a calendar that opens right under the box. A contract can't be saved with an expiration date before its start date.</li>
+          <li><span class="tag tag-cet">Contract Expiration Tracking</span>Automatic reminders: a company's account manager is emailed 90, 60, 30 and 7 days before a contract expires (a company with no account manager has nobody to send them to). The 7-day reminder also goes to the wider support contracts team, whether or not an account manager has been assigned. A "Reminders in the next 14 days" panel on the Dashboard shows what's about to be sent, and points out any reminder that has no account manager to go to.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="entry">
       <div class="date">1 Oct 2026</div>
