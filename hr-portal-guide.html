@@ -489,7 +489,7 @@
       <div class="refcard">
         <h3>The grid</h3>
         <p>Columns: Name, Department, Region, Type, Entitlement, Used, Pending, Remaining, Available, Sick, Unpaid, Other. Numbers show up to two decimal places; "—" means there is nothing to show (usually no allowance set yet).</p>
-        <p>Under a name you may see <span class="chip accent">Needs review</span> (their allowance for this year was created automatically and nobody has checked it) or <span class="chip muted">Inactive</span>.</p>
+        <p>Under a name you may see <span class="chip accent">Needs review</span> (their allowance for this year was created automatically and nobody has checked it), <span class="chip accent">Set region</span> (nobody has chosen their region yet; the Region column says "Not set") or <span class="chip muted">Inactive</span>.</p>
         <p>Click a row to open that person's page.</p>
       </div>
       <div class="refcard">
@@ -844,7 +844,7 @@
 
     <div class="flow">
       <p><strong>Each morning at 06:00</strong> the daily sync with the staff directory reads the two team groups (LBG Support and Office &amp; Installation).</p>
-      <p><strong>New team members are added automatically</strong> as Active, with the department of their team group (LBG Support if they are in both), region <strong>England and Wales</strong>, type Employee, tracking an allowance, and not approving their own leave. <strong>No allowance is created</strong>: their Entitlement shows "—".</p>
+      <p><strong>New team members are added automatically</strong> as Active, with the department of their team group (LBG Support if they are in both), <strong>no region</strong>, type Employee, tracking an allowance, and not approving their own leave. <strong>No allowance is created</strong>: their Entitlement shows "—". The directory cannot tell England and Wales from Scotland or Northern Ireland, so the region is left for you: the People grid shows "Not set" with a <span class="chip accent">Set region</span> chip, and the morning email asks you to choose one. Until you do, England and Wales bank holidays are used.</p>
       <p><strong>People who have dropped out of both groups are marked Inactive</strong> (only if the sync had seen them in a group before). Nobody is ever deleted. Someone HR has added by hand is never switched off before they have appeared in a group.</p>
       <p><strong>HR is emailed a summary</strong> ("Holiday staff directory: N new, M left") only on days when something changed. The sync does not reactivate someone who comes back, and does not update an existing person's name, email, department or region.</p>
     </div>
@@ -860,7 +860,7 @@
       <ol class="steps">
         <li><div class="step-body"><strong>Find them on the People tab</strong><span>They appear the morning after they are added to their team group. Not there? Use <span class="btn">+ Add person</span>.</span></div></li>
         <li><div class="step-body"><strong>Set their allowance</strong><span>Open them, enter <strong>Base days</strong> on the Allowance card, press <span class="btn">Save allowance</span>. For a part-year starter, add a Pro rata adjustment with a reason rather than changing the base.</span></div></li>
-        <li><div class="step-body"><strong>Set their Region if it is not England and Wales</strong><span>Profile card, choose Scotland or Northern Ireland, <span class="btn">Save profile</span>. Until you do, their leave is counted with England and Wales bank holidays.</span></div></li>
+        <li><div class="step-body"><strong>Choose their Region</strong><span>Profile card, choose England and Wales, Scotland or Northern Ireland (the box starts empty, and the profile will not save until you choose), <span class="btn">Save profile</span>. Until you do, their leave is counted with England and Wales bank holidays, and adding leave for them warns "No region is set for this person, so England and Wales bank holidays were used." Recount any leave you entered before choosing.</span></div></li>
         <li><div class="step-body"><strong>Check the rest of the profile</strong><span>Department, employment type, start date, and the tick boxes.</span></div></li>
       </ol>
     </div>
@@ -921,7 +921,7 @@
       <ol class="steps">
         <li><div class="step-body"><strong>Wait for the morning sync, or + Add person</strong><span>See <a href="#starters-leavers" style="color:var(--ink)">Starters and leavers</a>.</span></div></li>
         <li><div class="step-body"><strong>Allowance card › Base days › Save allowance</strong><span>Their Entitlement, Remaining and Available now show numbers.</span></div></li>
-        <li><div class="step-body"><strong>Profile card › Region (if needed) › Save profile</strong><span></span></div></li>
+        <li><div class="step-body"><strong>Profile card › Region › Save profile</strong><span>The "Set region" chip goes away.</span></div></li>
       </ol>
     </div>
 
@@ -980,7 +980,7 @@
       <div class="refcard"><h3>Leave lands in the year it starts</h3><p>The add form has no year field. If you are viewing 2026-27 and add leave starting in April 2027, it is saved but appears under 2027-28.</p></div>
       <div class="refcard"><h3>Recount is one record at a time</h3><p>After a bank-holiday or region change, there is no "recount everyone" button. A recount changes only the stored days, not calendar entries: to refresh the calendar on HR-entered leave, use Edit.</p></div>
       <div class="refcard"><h3>"Last synced from gov.uk" is the date of the newest gov.uk row</h3><p>Not the date of the last weekly check. A check that finds nothing new does not move it. gov.uk rows cannot be removed or edited from the portal.</p></div>
-      <div class="refcard"><h3>New starters default to England and Wales with no allowance</h3><p>Set Region and Base days yourself.</p></div>
+      <div class="refcard"><h3>New starters have no region and no allowance</h3><p>Choose Region and enter Base days yourself. The People grid shows "Set region" until you do. Until then England and Wales bank holidays are used.</p></div>
       <div class="refcard"><h3>Switching someone back to Active can be undone by the sync</h3><p>If you tick Active for someone who is in neither team group, the next morning's sync turns them off again. They need to be back in a team group.</p></div>
       <div class="refcard"><h3>Who is off includes sick leave</h3><p>It lists every approved type, so sick days show there too.</p></div>
       <div class="refcard"><h3>Open person can be greyed out</h3><p>On Leave records and Pending approvals the button is off when the person is not in the holiday system for the chosen year.</p></div>
@@ -1036,6 +1036,7 @@
           <tr><td class="msg">"Leave can't run longer than 60 days."</td><td>Enter it as two or more shorter records.</td></tr>
           <tr><td class="msg">"Splitting would leave a part with no working days. Edit the dates instead."</td><td>The part after 31 March has no working days. Edit the dates rather than splitting.</td></tr>
           <tr><td class="msg">"That person has no sign-in id yet, so leave cannot be recorded for them."</td><td>Contact IT: the person's account is not fully set up in the holiday system.</td></tr>
+          <tr><td class="msg">"No region is set for this person, so England and Wales bank holidays were used."</td><td>Shown after you add or edit leave for someone whose region has not been chosen. The record is saved. Choose their Region on the Profile card, then <span class="btn">Recount</span> the record.</td></tr>
           <tr><td class="msg">"Choose a department." / "Choose a region."</td><td>A profile needs both before it can be saved.</td></tr>
           <tr><td class="msg">"The end date can't be before the start date."</td><td>Swap or correct the dates.</td></tr>
           <tr><td class="msg">"Enter real start and end dates (dd/mm/yyyy)."</td><td>Type the dates in full, for example 05/01/2027.</td></tr>
