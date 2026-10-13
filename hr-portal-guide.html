@@ -489,7 +489,7 @@
       <div class="refcard">
         <h3>The grid</h3>
         <p>Columns: Name, Department, Region, Type, Entitlement, Used, Pending, Remaining, Available, Sick, Unpaid, Other. Numbers show up to two decimal places; "—" means there is nothing to show (usually no allowance set yet).</p>
-        <p>Under a name you may see <span class="chip accent">Needs review</span> (their allowance for this year was created automatically and nobody has checked it), <span class="chip accent">Set region</span> (nobody has chosen their region yet; the Region column says "Not set") or <span class="chip muted">Inactive</span>.</p>
+        <p>Under a name you may see <span class="chip accent">Needs review</span> (their allowance for this year was created automatically and nobody has checked it), <span class="chip accent">Set region</span> (nobody has chosen their region yet; the Region column says "Not set"), <span class="chip muted">No allowance tracked</span> (their balance cells show "—" for that reason) or <span class="chip muted">Inactive</span>.</p>
         <p>Click a row to open that person's page.</p>
       </div>
       <div class="refcard">
@@ -704,7 +704,7 @@
       </div>
     </div>
 
-    <div class="callout free" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Three things the portal does not stop you doing</strong>It does not check the person's balance when you approve, so look at Available first. It does not check whether the dates have already passed, so you can approve or cancel leave that has finished. And you cannot approve or reject your <em>own</em> request if it has a manager on record ("You can't approve or reject your own request. Ask another HR member."); the buttons still show, but the save is refused.</div>
+    <div class="callout free" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Three things the portal does not stop you doing</strong>It does not check the person's balance when you approve, so look at Available first. If the dates have already passed you can still approve or cancel it, but the box warns you ("This leave has already finished.") before you confirm. And you cannot approve or reject your <em>own</em> request if it has a manager on record ("You can't approve or reject your own request. Ask another HR member."); the buttons still show, but the save is refused.</div>
   </section>
 
   <hr class="rule">
@@ -866,7 +866,7 @@
     </div>
 
     <div class="flow">
-      <p><strong>For a leaver:</strong> normally the sync marks them Inactive the morning after they leave the team group. To do it yourself, open them, untick <span class="btn">Active</span>, press <span class="btn">Save profile</span>. Inactive people are hidden from the People grid unless "Show inactive" is ticked, are left out of the year rollover, and still appear in the people export. You can still record leave for them with the "Enter it anyway: this person is inactive" box.</p>
+      <p><strong>For a leaver:</strong> normally the sync marks them Inactive the morning after they leave the team group. To do it yourself, open them, untick <span class="btn">Active</span>, press <span class="btn">Save profile</span>. Inactive people are hidden from the People grid unless "Show inactive" is ticked, are left out of the year rollover, and still appear in the people export. You can still record leave for them with the "Enter it anyway: this person is inactive" box. <strong>To bring someone back,</strong> tick <span class="btn">Active</span> again and press <span class="btn">Save profile</span>: the daily sync then leaves them alone even if they are not in a team group, until they appear in one again.</p>
     </div>
   </section>
 
@@ -975,13 +975,12 @@
       <div class="refcard"><h3>An overlap needs a note</h3><p>The note box says "optional", but if you tick "Enter it anyway: it overlaps other leave" without a note the save is refused. A 0-working-day sick day needs a note too.</p></div>
       <div class="refcard"><h3>The confirm boxes only appear after a refusal</h3><p>Press the button, read the message, tick the box, press again.</p></div>
       <div class="refcard"><h3>Approving never checks the balance</h3><p>Look at Available before you approve.</p></div>
-      <div class="refcard"><h3>No end-date check on Approve or Cancel</h3><p>HR can approve or cancel leave whose dates have passed. Staff cannot cancel finished leave themselves.</p></div>
+      <div class="refcard"><h3>Approving or cancelling finished leave is allowed, with a warning</h3><p>HR can still approve or cancel leave whose dates have passed (staff cannot cancel finished leave themselves). The decision box says "This leave has already finished." before you confirm an approve or a cancel, and the reply repeats it. Leave ending today has not finished.</p></div>
       <div class="refcard"><h3>HR cannot edit an App request's dates</h3><p>Only Recount, Approve, Reject or Cancel. To change dates, cancel it with a reason and add HR leave.</p></div>
       <div class="refcard"><h3>Leave lands in the year it starts</h3><p>The add form has no year field. If you are viewing 2026-27 and add leave starting in April 2027, it is saved but appears under 2027-28.</p></div>
       <div class="refcard"><h3>Recount is one record at a time</h3><p>After a bank-holiday or region change, there is no "recount everyone" button. A recount changes only the stored days, not calendar entries: to refresh the calendar on HR-entered leave, use Edit.</p></div>
       <div class="refcard"><h3>"Last synced from gov.uk" is the date of the newest gov.uk row</h3><p>Not the date of the last weekly check. A check that finds nothing new does not move it. gov.uk rows cannot be removed or edited from the portal.</p></div>
       <div class="refcard"><h3>New starters have no region and no allowance</h3><p>Choose Region and enter Base days yourself. The People grid shows "Set region" until you do. Until then England and Wales bank holidays are used.</p></div>
-      <div class="refcard"><h3>Switching someone back to Active can be undone by the sync</h3><p>If you tick Active for someone who is in neither team group, the next morning's sync turns them off again. They need to be back in a team group.</p></div>
       <div class="refcard"><h3>Who is off includes sick leave</h3><p>It lists every approved type, so sick days show there too.</p></div>
       <div class="refcard"><h3>Open person can be greyed out</h3><p>On Leave records and Pending approvals the button is off when the person is not in the holiday system for the chosen year.</p></div>
       <div class="refcard"><h3>The Audit search covers only what is loaded</h3><p>It searches the newest 200 rows (of the chosen kind), not the whole history.</p></div>
@@ -1042,6 +1041,7 @@
           <tr><td class="msg">"Enter real start and end dates (dd/mm/yyyy)."</td><td>Type the dates in full, for example 05/01/2027.</td></tr>
           <tr><td class="msg">"Someone else changed this request while you were working. Reload to see where it stands."</td><td>The manager (or someone else) answered first. Reload; nothing was changed by you.</td></tr>
           <tr><td class="msg">"Only a pending request can be decided (it is Approved)."</td><td>The manager (or someone else) already answered. Nothing was changed; the list reloads. Same for "(it is Rejected)." and, when cancelling, "Only a pending or approved request can be cancelled (it is …)."</td></tr>
+          <tr><td class="msg">"This leave had already finished when it was approved." / "...when it was cancelled."</td><td>A notice, not an error: the decision was saved. It reminds you the dates were in the past.</td></tr>
           <tr><td class="msg">"You can't approve or reject your own request. Ask another HR member."</td><td>Exactly that. Another HR member can decide it.</td></tr>
           <tr><td class="msg">"HR-entered leave is changed with Edit or Delete. Only a request someone submitted can be approved or rejected."</td><td>Use <span class="btn">Edit</span> or <span class="btn">Delete</span> on that row.</td></tr>
           <tr><td class="msg">"Only pending or approved leave can be changed. Cancelled or rejected leave is a closed record."</td><td>Add a new record instead.</td></tr>
