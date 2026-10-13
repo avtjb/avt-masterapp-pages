@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>HR Portal Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    /* Neutral chrome -- not tied to any one module's brand */
+    --bg: #F3F3F0;
+    --surface: #FFFFFF;
+    --surface-2: #F7F7F4;
+    --border: #E2E2DD;
+    --ink: #1C1C19;
+    --muted: #63645D;
+    --eyebrow: #8D8E86;
+    --shadow: 0 1px 2px rgba(20,20,16,0.04), 0 8px 24px rgba(20,20,16,0.05);
+    --radius: 14px;
+
+    /* Room Checker -- the app's own LBG-green tile colour */
+    --rc-ink: #05643F;
+    --rc-soft: #E4F3EC;
+    --rc-border: #BEE0CE;
+
+    /* Warehouse Asset -- the app's own blue tile colour */
+    --wh-ink: #0B4FCC;
+    --wh-soft: #E7EEFC;
+    --wh-border: #C4D6F7;
+
+    /* Holiday Request -- the app's own amber tile colour */
+    --hol-ink: #A85A17;
+    --hol-soft: #FDEEE0;
+    --hol-border: #F1CFA4;
+
+    /* LBG Support / Office & Install pills, inside Holiday Request only */
+    --lbg-ink: #05643F;
+    --lbg-soft: #E4F3EC;
+    --lbg-border: #BEE0CE;
+    --oi-ink: #0B4FCC;
+    --oi-soft: #E7EEFC;
+    --oi-border: #C4D6F7;
+
+    /* Status semantics -- traffic-light convention, not brand colour */
+    --st-pending-ink: #A85A17;
+    --st-pending-soft: #FBF0E1;
+    --st-pending-border: #E9CFA6;
+    --st-approved-ink: #1E7A46;
+    --st-approved-soft: #E7F5EC;
+    --st-approved-border: #BEDDC9;
+    --st-rejected-ink: #A6392E;
+    --st-rejected-soft: #FBECEA;
+    --st-rejected-border: #E9C2BC;
+    --st-cancelled-ink: #63645D;
+    --st-cancelled-soft: #EDEDEA;
+    --st-cancelled-border: #D6D6D0;
+
+    /* Coming-soon modules -- their real (unused) tile colours, low-key */
+    --cp-ink: #A6392E;
+    --so-ink: #6B3FB0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131311;
+      --surface: #1C1C19;
+      --surface-2: #201F1C;
+      --border: #322F29;
+      --ink: #EDEDE8;
+      --muted: #9C9C94;
+      --eyebrow: #7C7C74;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+      --rc-ink: #3FCB9B;
+      --rc-soft: #16281F;
+      --rc-border: #2E4A3A;
+
+      --wh-ink: #6E9CF2;
+      --wh-soft: #172038;
+      --wh-border: #2E3E5E;
+
+      --hol-ink: #E8A461;
+      --hol-soft: #2A2015;
+      --hol-border: #4A3A24;
+
+      --lbg-ink: #3FCB9B;
+      --lbg-soft: #16281F;
+      --lbg-border: #2E4A3A;
+      --oi-ink: #6E9CF2;
+      --oi-soft: #172038;
+      --oi-border: #2E3E5E;
+
+      --st-pending-ink: #E8A461;
+      --st-pending-soft: #2A2015;
+      --st-pending-border: #4A3A24;
+      --st-approved-ink: #3FBE7B;
+      --st-approved-soft: #17281E;
+      --st-approved-border: #2E4A38;
+      --st-rejected-ink: #E68F84;
+      --st-rejected-soft: #2A1917;
+      --st-rejected-border: #4A2C27;
+      --st-cancelled-ink: #9C9C94;
+      --st-cancelled-soft: #201F1C;
+      --st-cancelled-border: #34332D;
+
+      --cp-ink: #E68F84;
+      --so-ink: #B39CE8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131311;
+    --surface: #1C1C19;
+    --surface-2: #201F1C;
+    --border: #322F29;
+    --ink: #EDEDE8;
+    --muted: #9C9C94;
+    --eyebrow: #7C7C74;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+    --rc-ink: #3FCB9B;
+    --rc-soft: #16281F;
+    --rc-border: #2E4A3A;
+
+    --wh-ink: #6E9CF2;
+    --wh-soft: #172038;
+    --wh-border: #2E3E5E;
+
+    --hol-ink: #E8A461;
+    --hol-soft: #2A2015;
+    --hol-border: #4A3A24;
+
+    --lbg-ink: #3FCB9B;
+    --lbg-soft: #16281F;
+    --lbg-border: #2E4A3A;
+    --oi-ink: #6E9CF2;
+    --oi-soft: #172038;
+    --oi-border: #2E3E5E;
+
+    --st-pending-ink: #E8A461;
+    --st-pending-soft: #2A2015;
+    --st-pending-border: #4A3A24;
+    --st-approved-ink: #3FBE7B;
+    --st-approved-soft: #17281E;
+    --st-approved-border: #2E4A38;
+    --st-rejected-ink: #E68F84;
+    --st-rejected-soft: #2A1917;
+    --st-rejected-border: #4A2C27;
+    --st-cancelled-ink: #9C9C94;
+    --st-cancelled-soft: #201F1C;
+    --st-cancelled-border: #34332D;
+
+    --cp-ink: #E68F84;
+    --so-ink: #B39CE8;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 28px 16px 64px;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; }
+
+  /* ---------- Header ---------- */
+  .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .masthead img { height: 26px; width: auto; display: block; }
+  .masthead .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--eyebrow); }
+
+  /* Logo wordmark is white text -- swap to the dark-text variant on a light background.
+     Selector must be at least as specific as ".masthead img" above, or that rule's
+     own display:block wins regardless of source order. */
+  .masthead img.logo-dark { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .masthead img.logo-light { display: none; }
+    :root:not([data-theme="light"]) .masthead img.logo-dark { display: block; }
+  }
+  :root[data-theme="dark"] .masthead img.logo-light { display: none; }
+  :root[data-theme="dark"] .masthead img.logo-dark { display: block; }
+
+  .title-block h1 { font-family: "Archivo Expanded", "IBM Plex Sans", sans-serif; font-weight: 800; font-size: clamp(26px, 6vw, 36px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance; color: var(--ink); }
+  .title-block p { margin: 0; color: var(--muted); font-size: 16px; max-width: 58ch; }
+
+  /* ---------- Quick nav ---------- */
+  nav.jump { display: flex; flex-wrap: wrap; gap: 8px; }
+  nav.jump a {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  nav.jump a:hover { border-color: var(--muted); }
+  nav.jump a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  nav.jump .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ---------- Module section shell ---------- */
+  .module { scroll-margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .module-head { display: flex; align-items: baseline; gap: 10px; }
+  .module-head .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-bottom: 2px; }
+  .module-head h2 { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 22px; margin: 0; letter-spacing: -0.005em; }
+  .module-head .status-tag {
+    margin-left: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .module-intro { margin: -4px 0 0; color: var(--muted); font-size: 14.5px; max-width: 62ch; }
+
+  /* ---------- Reference cards (tab-style, unordered) ---------- */
+  .cardset { display: flex; flex-direction: column; gap: 10px; }
+  .refcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 15px 18px;
+  }
+  .refcard h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+  .refcard p { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+  .refcard p:last-child { margin-bottom: 0; }
+
+  /* ---------- Numbered steps (real sequences only) ---------- */
+  .path { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .path-head { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+  .path-head .icon { font-size: 18px; line-height: 1; }
+  .path-head h3 { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 16px; margin: 0; }
+  .path-head .tag { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+
+  .steps { list-style: none; margin: 0; padding: 4px 20px 16px; counter-reset: step; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 26px 1fr; gap: 13px; padding: 10px 0; }
+  .steps li + li { border-top: 1px dashed var(--border); }
+  .steps li::before {
+    content: counter(step);
+    font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 12.5px;
+    color: var(--ink); background: var(--surface-2); border: 1px solid var(--border);
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .steps .step-body strong { display: block; font-weight: 600; margin-bottom: 2px; font-size: 14.5px; }
+  .steps .step-body span { color: var(--muted); font-size: 14px; }
+  .steps .step-body code { font-family: "IBM Plex Mono", monospace; font-size: 0.9em; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; }
+
+  .pill { display: inline-flex; align-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+
+  .callout { margin: 0 20px 16px; padding: 12px 15px; border-radius: 10px; font-size: 14px; }
+  .callout strong { display: block; margin-bottom: 2px; }
+
+  /* ---------- Flow / status / FAQ (Holiday Request shared reference) ---------- */
+  .subhead { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--eyebrow); margin: 2px 0 -4px; }
+  .flow { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .flow p { margin: 0; font-size: 14.5px; }
+  .flow p strong { color: var(--ink); }
+
+  .statuses { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media (max-width: 480px) { .statuses { grid-template-columns: 1fr; } }
+  .status-card { border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; background: var(--surface-2); }
+  .status-card .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .status-card p { margin: 0; font-size: 13px; color: var(--muted); }
+
+  .faq { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 4px 20px 6px; }
+  .faq details { border-top: 1px dashed var(--border); padding: 13px 0; }
+  .faq details:first-child { border-top: none; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14.5px; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: "IBM Plex Mono", monospace; color: var(--muted); font-size: 17px; line-height: 1; flex-shrink: 0; }
+  .faq details[open] summary::after { content: "\2212"; }
+  .faq summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  .faq .a { margin: 9px 0 0; color: var(--muted); font-size: 14px; }
+
+  /* ---------- Coming soon strip ---------- */
+  .soon-row { display: flex; flex-direction: column; gap: 8px; }
+  .soon-card { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 13px 16px; }
+  .soon-card .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .soon-card strong { font-size: 14.5px; }
+  .soon-card span { color: var(--muted); font-size: 13.5px; margin-left: auto; }
+
+  hr.rule { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
+
+  footer { text-align: center; padding-top: 6px; color: var(--muted); font-size: 13.5px; }
+  footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  footer a:hover { border-bottom-color: var(--muted); }
+
+  /* ---------- Extras for this guide only ---------- */
+  .masthead .back { font-size: 13px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .masthead .back:hover { border-bottom-color: var(--muted); }
+  .masthead .right { display: flex; align-items: center; gap: 14px; }
+  @media (max-width: 480px) { .masthead .eyebrow { display: none; } }
+
+  .callout.free { margin: 0; }
+  .flow ul, .refcard ul { margin: 0; padding-left: 20px; font-size: 14px; color: var(--muted); }
+  .flow ul { font-size: 14.5px; color: var(--ink); }
+  .flow li + li, .refcard li + li { margin-top: 4px; }
+  .flow p.lead { color: var(--muted); }
+
+  .btn { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.86em; font-weight: 600; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 7px; border-radius: 6px; white-space: nowrap; color: var(--ink); }
+  .msg { font-style: italic; }
+  .refcard .btn, .flow .btn, td .btn { color: var(--ink); }
+
+  .tablewrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow-x: auto; }
+  table.ref { border-collapse: collapse; width: 100%; font-size: 14px; }
+  table.ref th, table.ref td { text-align: left; vertical-align: top; padding: 10px 14px; border-top: 1px solid var(--border); }
+  table.ref thead th { border-top: none; background: var(--surface-2); font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+  table.ref td { color: var(--muted); }
+  table.ref td:first-child { color: var(--ink); font-weight: 600; }
+  table.ref caption { caption-side: top; text-align: left; padding: 12px 14px 6px; font-size: 13px; color: var(--muted); }
+
+  .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; vertical-align: middle; }
+  .chip.pending { color: var(--st-pending-ink); background: var(--st-pending-soft); border: 1px solid var(--st-pending-border); }
+  .chip.approved { color: var(--st-approved-ink); background: var(--st-approved-soft); border: 1px solid var(--st-approved-border); }
+  .chip.rejected { color: var(--st-rejected-ink); background: var(--st-rejected-soft); border: 1px solid var(--st-rejected-border); }
+  .chip.cancelled { color: var(--st-cancelled-ink); background: var(--st-cancelled-soft); border: 1px solid var(--st-cancelled-border); }
+  .chip.accent { color: var(--hol-ink); background: var(--hol-soft); border: 1px solid var(--hol-border); }
+  .chip.muted { color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
+
+  .example { background: var(--hol-soft); border: 1px solid var(--hol-border); border-radius: 10px; padding: 12px 15px; font-size: 14px; }
+  .example strong { color: var(--hol-ink); display: block; margin-bottom: 4px; }
+  .example table { border-collapse: collapse; margin-top: 6px; }
+  .example td { padding: 2px 14px 2px 0; }
+  .example td:last-child { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <img class="logo-light" src="av-team-mark-onlight.png" alt="AV-Team">
+    <img class="logo-dark" src="av-team-mark.png" alt="AV-Team">
+    <div class="right">
+      <span class="eyebrow">HR&nbsp;Guide</span>
+      <a class="back" href="help.html#holiday">‹ Back to the main guide</a>
+    </div>
+  </div>
+
+  <div class="title-block">
+    <h1>Holiday Request: the HR portal</h1>
+    <p>How to look after everyone's holiday, sick and other leave, step by step. For HR and for anyone covering HR.</p>
+  </div>
+
+  <div class="callout free" style="background:var(--hol-soft);border:1px solid var(--hol-border)"><strong style="color:var(--hol-ink)">Who this is for</strong>The HR portal is only shown to members of the HR group. If you are not in it, you will not see the tab or the button, and nothing in this guide applies to you. The <a href="help.html#holiday" style="color:var(--ink)">main guide</a> covers requesting your own leave.</div>
+
+  <nav class="jump" aria-label="Jump to section">
+    <a href="#at-a-glance"><span class="dot" style="background:var(--hol-ink)"></span>At a glance</a>
+    <a href="#balances"><span class="dot" style="background:var(--hol-ink)"></span>How balances work</a>
+    <a href="#people"><span class="dot" style="background:var(--hol-ink)"></span>People</a>
+    <a href="#person"><span class="dot" style="background:var(--hol-ink)"></span>A person's page</a>
+    <a href="#leave"><span class="dot" style="background:var(--hol-ink)"></span>Adding and editing leave</a>
+    <a href="#decisions"><span class="dot" style="background:var(--hol-ink)"></span>Approve, reject, cancel</a>
+    <a href="#records"><span class="dot" style="background:var(--hol-ink)"></span>Leave records &amp; Pending</a>
+    <a href="#bank-holidays"><span class="dot" style="background:var(--hol-ink)"></span>Bank holidays</a>
+    <a href="#rollover"><span class="dot" style="background:var(--hol-ink)"></span>Year rollover</a>
+    <a href="#audit-export"><span class="dot" style="background:var(--hol-ink)"></span>Audit &amp; Export</a>
+    <a href="#starters-leavers"><span class="dot" style="background:var(--hol-ink)"></span>Starters &amp; leavers</a>
+    <a href="#recipes"><span class="dot" style="background:var(--hol-ink)"></span>Everyday recipes</a>
+    <a href="#good-to-know"><span class="dot" style="background:var(--hol-ink)"></span>Good to know</a>
+    <a href="#messages"><span class="dot" style="background:var(--hol-ink)"></span>Messages</a>
+    <a href="#faq"><span class="dot" style="background:var(--muted)"></span>FAQ</a>
+    <a href="#help"><span class="dot" style="background:var(--muted)"></span>Getting help</a>
+  </nav>
+
+  <!-- ================= 1. AT A GLANCE ================= -->
+  <section class="module" id="at-a-glance">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>At a glance</h2>
+      <span class="status-tag" style="color:var(--hol-ink);background:var(--hol-soft);border:1px solid var(--hol-border)">Live</span>
+    </div>
+    <p class="module-intro">One place to see everyone's balance, record leave for people, and deal with requests when a manager can't.</p>
+
+    <div class="flow">
+      <p><strong>What it is for.</strong> Everyone's allowance and what they have used; recording holiday, sick, unpaid and other leave on someone's behalf; approving, rejecting or cancelling a request for a manager; keeping bank holidays, the yearly rollover, an audit trail and exports.</p>
+      <p><strong>Who can open it.</strong> Members of the HR group. People outside the group do not see it at all. Anyone who is added to the HR group also starts receiving HR's holiday emails.</p>
+      <p><strong>Where to find it on the web.</strong> Open Holiday Request in your browser. HR members see two tabs at the top: <span class="btn">My Requests</span> and <span class="btn">HR Portal</span>. Choose <span class="btn">HR Portal</span>.</p>
+      <p><strong>Where to find it on the phone.</strong> Open the Holiday Request tile in the AVT Master App. On <strong>My Requests</strong>, HR members see an <span class="btn">HR portal</span> button under <span class="btn">+ New Request</span>. It opens a screen called "HR portal" with the subtitle "Everyone's holiday balance".</p>
+      <p><strong>The holiday year.</strong> Most tabs have a year picker: <span class="btn">‹</span> and <span class="btn">›</span> either side of a label such as "2026-27". The year you pick is shared by People, Leave records, Bank holidays, Year rollover and Export. It starts on the 1 April on or before today.</p>
+    </div>
+
+    <div class="callout free" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Two things to know about the phone</strong>The Holiday tile on the phone opens only for people in one of the two team groups (LBG Support or Office &amp; Installation), so an HR member who is in neither team can use the web portal but not the phone one. And if you have just been added to the HR group, sign out of the app and back in once before the button appears.</div>
+
+    <div class="subhead">Web or phone?</div>
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>The web portal has everything. The phone has the day-to-day parts.</caption>
+        <thead><tr><th>What you want to do</th><th>Web</th><th>Phone</th></tr></thead>
+        <tbody>
+          <tr><td>See the People list, search, "Show inactive"</td><td>Yes</td><td>Yes (cards showing Remaining, Pending and Available)</td></tr>
+          <tr><td>Open a person: balance and leave</td><td>Yes (eight balance figures)</td><td>Yes (six: no "Unpaid used" or "Other used")</td></tr>
+          <tr><td>Add, edit and delete leave; Recount; Split</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Pending approvals: approve, reject, cancel</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Leave records tab and "Who is off"</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Add a person; edit a profile</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Allowances, "Mark as reviewed", adjustments</td><td>Yes</td><td>No (read-only summary)</td></tr>
+          <tr><td>Bank holidays; Year rollover; Audit; Export</td><td>Yes</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="module-intro">The phone's People screen has a card called "More on the web portal" with an <span class="btn">Open the web portal</span> button for anything it cannot do. Pull down on any phone screen to refresh it.</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 2. HOW BALANCES WORK ================= -->
+  <section class="module" id="balances">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>How balances work</h2>
+    </div>
+    <p class="module-intro">Worth five minutes. Every number on the People grid and on a person's page comes from these rules.</p>
+
+    <div class="flow">
+      <p><strong>The holiday year runs 1 April to 31 March.</strong> A leave record belongs to the year it <em>starts</em> in. Leave that starts in March and runs into April counts wholly in the earlier year, unless you split it (see <a href="#leave" style="color:var(--ink)">Adding and editing leave</a>).</p>
+      <p><strong>Only Annual leave counts against the allowance.</strong> Sick, Unpaid and Other leave are added up separately and never reduce it.</p>
+      <p><strong>Only Approved and Pending records count.</strong> Rejected and Cancelled records count for nothing.</p>
+      <p><strong>Working days are stored on each record when it is saved.</strong> The balance adds up those stored numbers. Changing a bank holiday later does not change records already saved (use <span class="btn">Recount</span> for that).</p>
+    </div>
+
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>The eight figures, in the order they appear</caption>
+        <thead><tr><th>Figure</th><th>How it is worked out</th></tr></thead>
+        <tbody>
+          <tr><td>Entitlement</td><td>Base days plus all adjustments (positive or negative) for that year. Shows "—" if the person has no allowance for the year, does not track an allowance, or has no base days.</td></tr>
+          <tr><td>Used</td><td>Working days of <em>Approved Annual leave</em> starting in the year.</td></tr>
+          <tr><td>Pending</td><td>Working days of <em>Pending Annual leave</em> starting in the year.</td></tr>
+          <tr><td>Remaining</td><td>Entitlement minus Used. Pending is <em>not</em> taken off. Blank if Entitlement is blank.</td></tr>
+          <tr><td>Available</td><td>Remaining minus Pending. The safe number to quote to someone. Blank if Remaining is blank.</td></tr>
+          <tr><td>Sick used</td><td>Working days of Approved Sick leave.</td></tr>
+          <tr><td>Unpaid used</td><td>Working days of Approved Unpaid leave.</td></tr>
+          <tr><td>Other used</td><td>Working days of Approved Other leave.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="example">
+      <strong>Worked example</strong>
+      Someone has a base of 25 days and a carry-over adjustment of 3. They have 12 days of approved holiday this year and a 5-day request still waiting.
+      <table>
+        <tr><td>Entitlement</td><td>25 + 3 = 28</td></tr>
+        <tr><td>Used</td><td>12</td></tr>
+        <tr><td>Pending</td><td>5</td></tr>
+        <tr><td>Remaining</td><td>28 − 12 = 16</td></tr>
+        <tr><td>Available</td><td>16 − 5 = 11</td></tr>
+      </table>
+    </div>
+
+    <div class="subhead">How working days are counted</div>
+    <div class="flow">
+      <p>For any record, the portal counts <strong>Monday to Friday</strong> between the start and end dates, both dates included, and takes off any <strong>bank holiday for the person's region</strong> on those days. That includes both the official gov.uk bank holidays and any company days HR has added for that region.</p>
+      <p><strong>Whole days only.</strong> There are no half days.</p>
+      <p><strong>A record can be at most 60 days long</strong> (calendar days, counting both ends).</p>
+      <p>A person with no region set is counted as England and Wales.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 3. PEOPLE ================= -->
+  <section class="module" id="people">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>People tab</h2>
+    </div>
+    <p class="module-intro">The first tab, and the one the portal opens on. Everyone's balance for the chosen year, one row each.</p>
+
+    <div class="cardset">
+      <div class="refcard">
+        <h3>The grid</h3>
+        <p>Columns: Name, Department, Region, Type, Entitlement, Used, Pending, Remaining, Available, Sick, Unpaid, Other. Numbers show up to two decimal places; "—" means there is nothing to show (usually no allowance set yet).</p>
+        <p>Under a name you may see <span class="chip accent">Needs review</span> (their allowance for this year was created automatically and nobody has checked it) or <span class="chip muted">Inactive</span>.</p>
+        <p>Click a row to open that person's page.</p>
+      </div>
+      <div class="refcard">
+        <h3>Search and "Show inactive"</h3>
+        <p>The search box ("Search by name or email") narrows the list as you type. Inactive people are hidden until you tick <span class="btn">Show inactive</span>.</p>
+        <p>If the list is empty you will see "No people yet — the directory sync runs at 06:00; add a person manually if needed". If a search matches nobody: "No one matches that search."</p>
+      </div>
+      <div class="refcard">
+        <h3>+ Add person</h3>
+        <p>For someone the daily sync with the staff directory has not picked up yet. Normally you will not need this: new team members appear by themselves each morning (see <a href="#starters-leavers" style="color:var(--ink)">Starters and leavers</a>).</p>
+        <p>Fields, in order: <strong>Name</strong>; <strong>Sign-in id</strong> (the 36-character id of the person's sign-in account; ask IT for it); <strong>Email</strong>; Department (<span class="btn">LBG Support</span> or <span class="btn">Office &amp; Installation</span>); Region (<span class="btn">England and Wales</span>, <span class="btn">Scotland</span> or <span class="btn">Northern Ireland</span>); Employment type (<span class="btn">Employee</span>, <span class="btn">Contractor</span> or <span class="btn">Agency</span>); tick boxes <span class="btn">Tracks an allowance</span>, <span class="btn">Active</span> and <span class="btn">Approves their own leave</span>; <strong>Start date (dd/mm/yyyy)</strong>; <strong>Notes</strong>.</p>
+        <p>When the form opens, Employee, Tracks an allowance and Active are already set. Department and Region are blank and must be chosen.</p>
+        <p>Press <span class="btn">Add person</span> to save, or <span class="btn">Cancel</span>. On success you see "{Name} added."</p>
+      </div>
+    </div>
+
+    <div class="callout free" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Adding a person does not set their allowance</strong>A new person has no allowance until you open their page and enter base days, so their Entitlement shows "—" until then. Nobody is emailed when you add a person. If the sign-in id is already in the system you will see "That person is already in the holiday system."</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 4. A PERSON'S PAGE ================= -->
+  <section class="module" id="person">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>A person's page</h2>
+    </div>
+    <p class="module-intro">Open it from the People grid, or with <span class="btn">Open person</span> on Leave records or Pending approvals. <span class="btn">‹ People</span> takes you back.</p>
+
+    <div class="flow">
+      <p><strong>At the top:</strong> the person's name; a line with their department, region and email; an <span class="chip muted">Inactive</span> chip if they have left; and the buttons <span class="btn">+ Add leave</span> and <span class="btn">+ Add sick days</span>. Green notices and red errors appear just under the header.</p>
+      <p><strong>Year:</strong> the page shows the year chosen on the portal and has no year picker of its own. To look at another year, go back to a tab with a picker, change it, and open the person again.</p>
+    </div>
+
+    <div class="cardset">
+      <div class="refcard">
+        <h3>Balance card ("Balance, 2026-27")</h3>
+        <p>The eight figures explained in <a href="#balances" style="color:var(--ink)">How balances work</a>: Entitlement, Used, Pending, Remaining, Available, Sick used, Unpaid used, Other used.</p>
+      </div>
+
+      <div class="refcard">
+        <h3>Profile card</h3>
+        <p>The name cannot be changed anywhere in the portal. For someone added with + Add person it is the name typed at the time, so check it before saving. You can change: <strong>Email</strong>; Department; Region; Employment type; the tick boxes <span class="btn">Tracks an allowance</span>, <span class="btn">Active</span> and <span class="btn">Approves their own leave</span>; <strong>Start date (dd/mm/yyyy)</strong>; and <strong>Notes</strong> (up to 4000 characters). Press <span class="btn">Save profile</span>; you will see "Saved."</p>
+        <p><strong>Region matters:</strong> it decides which bank holidays are taken off this person's leave. <strong>Department matters:</strong> it decides which team calendar their leave goes on.</p>
+        <p>Leaving Email or Start date blank keeps the current value; they cannot be cleared. Nobody is emailed when you save a profile.</p>
+      </div>
+
+      <div class="refcard">
+        <h3>Allowance card ("Allowance, 2026-27")</h3>
+        <p>The status line reads "Base {x} + adjustments {y} = {z} days", or "No allowance recorded for 2026-27. Enter the base days to create it." if nothing is set yet, or "No allowance is tracked for this person" (shown when a row exists for someone who does not track an allowance; the Base days box is hidden for them).</p>
+        <p>Enter <strong>Base days</strong> (for example 25) and optional <strong>Allowance notes</strong>, then press <span class="btn">Save allowance</span>. Days must be between 0 and 365, with at most two decimal places. You will see "Allowance saved."</p>
+        <p>The review chip shows "Reviewed dd/mm/yyyy by {name}" or <span class="chip accent">Not reviewed yet</span>. Press <span class="btn">Mark as reviewed</span> to stamp your name and the date without changing anything. Any <span class="btn">Save allowance</span> also counts as a review, so either clears the "Needs review" chip on the People grid.</p>
+        <p>If the person does not track an allowance, saving stores no days and tells you: "This person does not track an allowance, so no days were stored."</p>
+      </div>
+
+      <div class="refcard">
+        <h3>Adjustments</h3>
+        <p>Listed under the allowance as "{Kind} +n/-n — {reason} ({entered by})", or "None for 2026-27". Each one changes the Entitlement straight away.</p>
+        <p>To add one: <strong>Adjustment days (+ or −)</strong> (for example 3 or -1.5); <strong>Adjustment kind</strong>: Carry-over, Owed, Pro rata, Purchased, Correction or Other; <strong>Adjustment reason</strong> (required). Press <span class="btn">Add adjustment</span>. Days must be between -365 and 365, not zero, with at most two decimal places.</p>
+        <p>You must save the allowance first: the button stays off with the note "Save the allowance first; adjustments belong to it."</p>
+        <p><span class="btn">Remove</span> next to an adjustment asks "Remove this adjustment? It comes off the allowance straight away." Adding or removing an adjustment does not change the review chip.</p>
+      </div>
+    </div>
+
+    <div class="subhead">Leave ledger ("Leave in 2026-27")</div>
+    <div class="flow">
+      <p>Every leave record that starts in the chosen year. Each row shows the type, the dates, the number of working days, and chips for the status, the source (<span class="chip muted">App</span> for a request the person submitted, <span class="chip muted">HR</span> for leave HR entered), <span class="chip muted">Note</span> if there is an HR note, and <span class="chip muted">Crosses 31 March</span> if it does.</p>
+      <p class="lead">The note text itself and the person's reason are not shown in the ledger. The buttons you see depend only on where the record came from and its status; they do not depend on whether the dates have passed.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>Which buttons appear on a ledger row</caption>
+        <thead><tr><th>Source</th><th>Status</th><th>Buttons</th></tr></thead>
+        <tbody>
+          <tr><td>HR</td><td><span class="chip pending">Pending</span> or <span class="chip approved">Approved</span></td><td><span class="btn">Edit</span> <span class="btn">Delete</span> <span class="btn">Recount</span>, plus <span class="btn">Split</span> if it crosses 31 March</td></tr>
+          <tr><td>HR</td><td><span class="chip rejected">Rejected</span> or <span class="chip cancelled">Cancelled</span></td><td><span class="btn">Delete</span> <span class="btn">Recount</span></td></tr>
+          <tr><td>App</td><td><span class="chip pending">Pending</span></td><td><span class="btn">Recount</span> <span class="btn">Approve</span> <span class="btn">Reject</span> <span class="btn">Cancel request</span></td></tr>
+          <tr><td>App</td><td><span class="chip approved">Approved</span></td><td><span class="btn">Recount</span> <span class="btn">Cancel request</span></td></tr>
+          <tr><td>App</td><td><span class="chip rejected">Rejected</span> or <span class="chip cancelled">Cancelled</span></td><td><span class="btn">Recount</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cardset">
+      <div class="refcard">
+        <h3>Edit</h3>
+        <p>Opens "Edit leave for {name}" with the type, dates and HR note filled in. Saving rewrites the record and its calendar entries. The person, status and source never change. Only for HR-entered leave: an App request's dates cannot be edited (see <a href="#recipes" style="color:var(--ink)">Everyday recipes</a>).</p>
+      </div>
+      <div class="refcard">
+        <h3>Delete</h3>
+        <p>Asks "Delete this leave record? It is removed from the balance and from the calendar." Then it is gone for good, calendar entries included. The person is not emailed. The audit trail keeps the dates, type, days and status, but not the notes. On the phone the question reads "Delete this leave?" with <span class="btn">Keep it</span> / <span class="btn">Delete</span>.</p>
+      </div>
+      <div class="refcard">
+        <h3>Recount</h3>
+        <p>No confirmation. Works out the working days again from the record's dates, using the person's <em>current</em> region and the <em>current</em> bank-holiday list, and saves the new number if it changed. You see "Recounted: N working day(s)." either way. Works on any status. Nobody is emailed. Records longer than the recount supports are refused: "That record is longer than the recount supports (61 days). Edit it instead." (such a record can only be fixed by editing an HR-entered one into shorter records; for an app request, contact IT).</p>
+      </div>
+      <div class="refcard">
+        <h3>Split</h3>
+        <p>Only on HR-entered leave that crosses 31 March. Asks "Split this leave at 31 March into two records?" The original then ends on 31 March and a second record starts on 1 April, counting in the new holiday year. Both are recounted. You see "Split at 31 March: X + Y working days." If the second part cannot be created, the original is put back as it was. On the phone the question reads "Split this leave at 31 March?" with <span class="btn">Keep it</span> / <span class="btn">Split</span>.</p>
+      </div>
+      <div class="refcard">
+        <h3>Approve, Reject, Cancel request</h3>
+        <p>Only on App requests. See <a href="#decisions" style="color:var(--ink)">Approving, rejecting and cancelling on someone's behalf</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 5. ADDING AND EDITING LEAVE ================= -->
+  <section class="module" id="leave">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Adding and editing leave</h2>
+    </div>
+    <p class="module-intro">Recording holiday, sick days, unpaid leave or anything else on someone's behalf.</p>
+
+    <div class="path">
+      <div class="path-head">
+        <span class="icon">📝</span>
+        <h3>Add leave for someone</h3>
+        <span class="tag">Web or phone</span>
+      </div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Open the person</strong><span>People tab, click their row. Check the year picker shows the year the leave <em>starts</em> in.</span></div></li>
+        <li><div class="step-body"><strong>Press + Add leave or + Add sick days</strong><span><span class="btn">+ Add leave</span> opens "Add leave for {name}" with Annual leave chosen. <span class="btn">+ Add sick days</span> opens the same form with Sick leave chosen.</span></div></li>
+        <li><div class="step-body"><strong>Choose the type</strong><span><code>Annual leave</code>, <code>Unpaid leave</code>, <code>Sick leave</code> or <code>Other</code>. Only Annual leave comes off the allowance.</span></div></li>
+        <li><div class="step-body"><strong>Enter the dates</strong><span>Two boxes, Start and End, typed as dd/mm/yyyy (for example 09/11/2026). A single day is the same date in both. A line under the dates shows the working-day count straight away, such as "3 working days". On the phone, <span class="btn">Choose dates</span> opens a date picker instead.</span></div></li>
+        <li><div class="step-body"><strong>Add an HR note if you need one</strong><span>"HR note (optional)", up to 2000 characters. It is for HR's eyes: it never goes on a calendar and the person does not see it. Some situations <em>require</em> a note (see below).</span></div></li>
+        <li><div class="step-body"><strong>Save</strong><span>Press <span class="btn">Add leave</span> (or <span class="btn">Save changes</span> when editing). You see "Leave added: N working day(s)." or "Saved: N working day(s)."</span></div></li>
+      </ol>
+      <div class="callout" style="background:var(--st-approved-soft);border:1px solid var(--st-approved-border)"><strong style="color:var(--st-approved-ink)">What gets created</strong>The record is saved as <strong>Approved</strong>, source <strong>HR</strong>, with your name on it. It goes on the person's department calendar as an all-day entry "{Name} - Annual Leave" (or Unpaid Leave, Sick Leave, Other), and also on the other team's calendar if the person is in that team's group or the cross-posting group. The calendar entry can take up to 15 minutes to show in Outlook. The note text is not put on the calendar.</div>
+      <div class="callout" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">The person is not told</strong>Leave that HR enters sends the person nothing: no email, no calendar invite, no phone notification. It simply appears in their My Requests list marked "Entered by HR", and they cannot cancel it themselves. If they need to know, tell them.</div>
+    </div>
+
+    <div class="subhead">The "Enter it anyway" boxes</div>
+    <div class="flow">
+      <p>Some things are blocked at first. When that happens the error appears and a tick box appears under it. Tick it, then press the button again. The box stays ticked for any further tries in the same form.</p>
+      <p><strong>"Enter it anyway: it overlaps other leave"</strong> appears when the dates clash with Pending or Approved leave the person already has ("That overlaps leave this person already has. Confirm to enter it anyway."). <strong>An overlap also needs an HR note</strong> saying why, even though the note box says "optional". Without one you will see "An overlapping record needs a note saying why."</p>
+      <p><strong>"Enter it anyway: no working days (sick days only, with a note)"</strong> appears when the range has no working days, for example a weekend ("That range has no working days. Only a sick day with a note can be entered as 0 days."). This is allowed only for <strong>Sick leave</strong>, and only <strong>with an HR note</strong>.</p>
+      <p><strong>"Enter it anyway: this person is inactive"</strong> appears when the person has left ("That person is not active. Confirm to enter leave for an inactive person."). This is how you record leave for a leaver after the event.</p>
+    </div>
+
+    <div class="subhead">Checks before it saves</div>
+    <div class="flow">
+      <p>You need a type and two real dates. The end date cannot be before the start date. Leave cannot run longer than 60 days. Notes are limited to 2000 characters. The working-day count shown on screen is a preview; the number the portal stores is its own count using the same rules.</p>
+    </div>
+
+    <div class="subhead">Leave that crosses 31 March</div>
+    <div class="flow">
+      <p>If the dates cross 31 March, the form tells you: "This leave crosses 31 March. Save it as one record, or split it afterwards: the second part then counts in the new holiday year."</p>
+      <p>Saved as one record, all of it counts in the year it starts in. If you want the April days to come off next year's allowance, save it and then press <span class="btn">Split</span> on the ledger row. Split is only available on HR-entered leave.</p>
+    </div>
+
+    <div class="subhead">Editing</div>
+    <div class="flow">
+      <p><span class="btn">Edit</span> on an HR-entered row opens "Edit leave for {name}" with the type, dates and HR note filled in. Change what you need and press <span class="btn">Save changes</span>. The calendar entries are replaced and the working days recounted with the person's current region. The "Enter it anyway" boxes always start unticked, so an overlap or an inactive person will need confirming again.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 6. DECISIONS ================= -->
+  <section class="module" id="decisions">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Approving, rejecting and cancelling on someone's behalf</h2>
+    </div>
+    <p class="module-intro">For requests people have submitted themselves. HR-entered leave is changed with Edit or Delete instead.</p>
+
+    <div class="flow">
+      <p><strong>Where:</strong> the <span class="btn">Pending approvals</span> tab (every waiting request, all years) or the person's own ledger.</p>
+      <p><strong>Which buttons:</strong> a <span class="chip pending">Pending</span> request has <span class="btn">Approve</span>, <span class="btn">Reject</span> and <span class="btn">Cancel request</span>. An <span class="chip approved">Approved</span> request has <span class="btn">Cancel request</span> only. <span class="chip rejected">Rejected</span> and <span class="chip cancelled">Cancelled</span> requests have none.</p>
+      <p><strong>Whichever comes first counts.</strong> The manager still has the request in their own approvals and email. If they have already answered, you will usually see "Only a pending request can be decided (it is Approved)." (or "…(it is Rejected)."); for a cancel, "Only a pending or approved request can be cancelled (it is …).". If they answer at the very moment you save, you see "Someone else changed this request while you were working. Reload to see where it stands." Either way nothing is changed and the list reloads. If you answer first, their later answer is ignored.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>Pressing a button opens a box under the request</caption>
+        <thead><tr><th>Button</th><th>Note box</th><th>Required?</th><th>What the person gets</th></tr></thead>
+        <tbody>
+          <tr><td>Approve</td><td>"Note to the person (optional)", up to 2000 characters</td><td>No</td><td>An email ("Your holiday request (dates) was approved") with the leave, dates, working days, days remaining and your note; a calendar invite in their own calendar; a phone notification. The leave goes on the team calendar. Dates in these emails are written year-month-day (for example 2026-11-09).</td></tr>
+          <tr><td>Reject</td><td>"Reason for rejecting", up to 2000 characters</td><td>Yes</td><td>An email ("Your holiday request (dates) was rejected") with the leave, dates, working days, days remaining and your reason, and a phone notification.</td></tr>
+          <tr><td>Cancel request</td><td>"Reason for cancelling", up to 1000 characters</td><td>Yes</td><td>An email ("Your holiday request (dates) was cancelled") with your reason, and a phone notification. Team calendar entries are removed. If it had been approved, their own calendar invite is cancelled too, and if a manager is on record they get a phone notification (it reads "{name} cancelled leave …").</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flow">
+      <p>Confirm with <span class="btn">Approve request</span>, <span class="btn">Reject request</span> or <span class="btn">Cancel request</span>, or press <span class="btn">Back</span> to close the box. On success you see "Approved {name}'s leave. They have been emailed.", "Rejected {name}'s request. They have been emailed." or "Cancelled {name}'s leave. They have been emailed." HR's shared mailbox is blind-copied on every one of these emails.</p>
+      <p>Leaving a required reason blank keeps the box open: "Enter a reason for rejecting this request: the person is sent it." or "Enter a reason for cancelling this request: the person is sent it."</p>
+    </div>
+
+    <div class="subhead">Chips you will see on a pending request</div>
+    <div class="cardset">
+      <div class="refcard">
+        <h3>"Waiting today" / "Waiting {n} day(s)"</h3>
+        <p>How long since it was raised.</p>
+      </div>
+      <div class="refcard">
+        <h3>"Approver: {name}"</h3>
+        <p>The manager it went to.</p>
+      </div>
+      <div class="refcard">
+        <h3>"Needs an approver"</h3>
+        <p>The person has no manager on record, so nobody else will decide it. HR decides.</p>
+      </div>
+      <div class="refcard">
+        <h3>"Approval expired: decide here"</h3>
+        <p>The manager's approval card timed out after 28 days without an answer. The request is still Pending and now needs HR. HR's shared mailbox also gets an email headed "[Holiday] Approval expired: {name} ({dates})".</p>
+      </div>
+    </div>
+
+    <div class="callout free" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Three things the portal does not stop you doing</strong>It does not check the person's balance when you approve, so look at Available first. It does not check whether the dates have already passed, so you can approve or cancel leave that has finished. And you cannot approve or reject your <em>own</em> request if it has a manager on record ("You can't approve or reject your own request. Ask another HR member."); the buttons still show, but the save is refused.</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 7. LEAVE RECORDS AND PENDING ================= -->
+  <section class="module" id="records">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Leave records and Pending approvals</h2>
+    </div>
+    <p class="module-intro">Two ways of seeing leave across everyone rather than one person at a time. Leave records is web only. Pending approvals is on the web and on the phone (the <strong>Pending approvals</strong> button at the top of the phone's HR portal screen).</p>
+
+    <div class="cardset">
+      <div class="refcard">
+        <h3>Leave records: "All records"</h3>
+        <p>Every record that starts in the chosen year, newest first, with the name, type, dates, working days and chips for the status, the source and "Crosses 31 March". <span class="btn">Open person</span> takes you to their page; there are no edit or decision buttons here.</p>
+        <p>The Filters card has: Type (Any / Annual leave / Unpaid leave / Sick leave / Other); Status (Any / Pending / Approved / Rejected / Cancelled); Source (Any / App / HR); "Starts from (dd/mm/yyyy)" and "Starts up to (dd/mm/yyyy)"; tick boxes "Crosses 31 March" and "Needs review (people whose allowance is not reviewed)"; and "Search by name or email".</p>
+        <p><strong>Press <span class="btn">Apply filters</span></strong> to run the Type, Status, Source, date and Crosses 31 March filters. The name search and the Needs review box narrow the list straight away without it. <span class="btn">Clear filters</span> resets everything.</p>
+        <p>The date filters match the <em>start</em> date of each record, not any overlap. Dates must be real or blank, and "to" cannot be before "from".</p>
+      </div>
+      <div class="refcard">
+        <h3>Leave records: "Who is off"</h3>
+        <p>Switch the View to <span class="btn">Who is off</span>. It shows approved leave that has not yet ended, week by week (Monday to Sunday) from this week on, as cards titled "Week of dd/mm/yyyy". Weeks with nobody off are left out. Click a line to open the person. If nobody is booked off: "Nobody is booked off from today on in 2026-27".</p>
+      </div>
+      <div class="refcard">
+        <h3>Pending approvals</h3>
+        <p>Every waiting request anyone has submitted, oldest first, from <em>any</em> year (this tab ignores the year picker). Each shows the name, type, dates, working days, the person's reason in quotes if they gave one, the chips listed under <a href="#decisions" style="color:var(--ink)">Approve, reject, cancel</a>, and the buttons <span class="btn">Approve</span>, <span class="btn">Reject</span>, <span class="btn">Cancel request</span> and <span class="btn">Open person</span>. When there is nothing waiting: "Nothing waiting for approval".</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 8. BANK HOLIDAYS ================= -->
+  <section class="module" id="bank-holidays">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Bank holidays tab</h2>
+    </div>
+    <p class="module-intro">The days that are taken off working-day counts, by region.</p>
+
+    <div class="flow">
+      <p><strong>Where the list comes from.</strong> The official gov.uk bank holidays for England and Wales, Scotland and Northern Ireland are pulled in automatically once a week. These rows carry a <span class="chip muted">gov.uk</span> chip and cannot be removed or edited here. Rows HR adds carry <span class="chip muted">Added by HR</span>.</p>
+      <p><strong>One row covers one region.</strong> A company-wide day off needs a row for each region your people are in.</p>
+      <p>Under the title you will see "Last synced from gov.uk dd/mm/yyyy". That is the date the newest gov.uk holiday was added to the list, not the date of the last weekly check, so it does not move every week.</p>
+    </div>
+
+    <div class="path">
+      <div class="path-head">
+        <span class="icon">📅</span>
+        <h3>Add a bank holiday or company day</h3>
+        <span class="tag">Web only</span>
+      </div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Pick the year</strong><span>Use <span class="btn">‹</span> / <span class="btn">›</span> so the list shows the year the date falls in.</span></div></li>
+        <li><div class="step-body"><strong>Fill in the card "Add a bank holiday or company day"</strong><span>Date (dd/mm/yyyy), one Region, and a Title (up to 200 characters).</span></div></li>
+        <li><div class="step-body"><strong>Press Add bank holiday</strong><span>You see "Bank holiday added." Repeat for each other region. A date that is already a holiday for that region is refused: "That date is already a bank holiday for that region."</span></div></li>
+      </ol>
+      <div class="callout" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Records already saved do not change by themselves</strong>Adding or removing a holiday only affects counts made from now on. After either you will see "Leave records already saved on this date keep their working days until you recount them." Open each affected person and press <span class="btn">Recount</span> on the records that include that date, one record at a time.</div>
+    </div>
+
+    <div class="flow">
+      <p><strong>Removing a company day.</strong> <span class="btn">Remove</span> appears only on rows HR added. It asks "Remove {title} on dd/mm/yyyy? Working-day counts that use it change from now on." You see "Bank holiday removed." afterwards, with the same recount reminder.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 9. YEAR ROLLOVER ================= -->
+  <section class="module" id="rollover">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Year rollover</h2>
+    </div>
+    <p class="module-intro">Creating next year's allowances, with carry-over, for everyone at once. Web only.</p>
+
+    <div class="flow">
+      <p><strong>When.</strong> The tab opens on <strong>1 February</strong> each year (before that it says "The rollover into 2027-28 opens on 01/02/2027."). On <strong>1 March</strong> HR receives a reminder email headed "ROLLOVER DUE" listing anyone still to do. On <strong>1 April</strong> anyone not yet rolled over is created automatically, with no carry-over.</p>
+      <p><strong>Who.</strong> Active people only. Someone marked Inactive is not included.</p>
+      <p>The year picker shows the year you are rolling <em>from</em>; the line under the title reads "From 2026-27 into 2027-28".</p>
+    </div>
+
+    <div class="path">
+      <div class="path-head">
+        <span class="icon">🔁</span>
+        <h3>Confirming the rollover</h3>
+        <span class="tag">February–March</span>
+      </div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Read the banner</strong><span>"Rollover not yet done for {n} person/people: if it isn't confirmed by 1 April, the automatic fallback creates their rows with no carry-over." Once everyone is done it reads "Everyone already has a row for 2027-28."</span></div></li>
+        <li><div class="step-body"><strong>Check each row</strong><span>Columns: Person, 2026-27 base, Remaining, 2027-28 base, Carry-over. The portal suggests next year's base equal to this year's, and the carry-over equal to this year's Remaining (never below zero; this is Entitlement minus approved Annual leave, so pending requests are not taken off). People who do not track an allowance show "Not tracked" with a carry-over of 0.</span></div></li>
+        <li><div class="step-body"><strong>Change any figure you need to</strong><span>Base days between 0 and 365; carry-over between -365 and 365; two decimal places at most. Rows marked "Already created" cannot be changed here.</span></div></li>
+        <li><div class="step-body"><strong>Press Confirm rollover</strong><span>It asks "Create the 2027-28 allowances and carry-overs shown? Each is saved straight away and can be corrected on the person's page." Then you see "Rolled over N person/people." plus how many were skipped and why.</span></div></li>
+      </ol>
+      <div class="callout" style="background:var(--st-approved-soft);border:1px solid var(--st-approved-border)"><strong style="color:var(--st-approved-ink)">Safe to run again</strong>People are saved 25 at a time. If it stops part-way you will see how many were done; run it again and the people already done are skipped. Rows created this way are already marked as reviewed, and any carry-over appears on the person's page as "Carry over +N — Carried over into the year starting 2027-04-01 (your name)" (the date is year-month-day).</div>
+    </div>
+
+    <div class="callout free" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">If 1 April arrives first</strong>Every active person without a next-year row gets one automatically, copying last year's base days but with <strong>no carry-over</strong>, and HR is emailed "YEAR STARTED". These rows show a <span class="chip accent">Needs review</span> chip on the People grid. The rollover tab then marks everyone "Already created" (the year picker now starts on the new year, so press ‹ to see 2026-27 → 2027-28), so any carry-over has to be added person by person as a Carry-over adjustment. Anyone who tracks an allowance but had no row last year is not created and is listed in the email for HR to set up by hand.</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 10. AUDIT AND EXPORT ================= -->
+  <section class="module" id="audit-export">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Audit and Export</h2>
+    </div>
+    <p class="module-intro">Seeing who changed what, and taking the data out as spreadsheets. Web only.</p>
+
+    <div class="cardset">
+      <div class="refcard">
+        <h3>Audit tab</h3>
+        <p>"The newest 200 changes. Notes and reasons are never stored here, only what changed." Every HR change, decision, cancellation, rollover and daily-sync change is recorded with what happened, who did it and when (UK time), and a one-line summary.</p>
+        <p>Filter by <strong>Kind of change</strong> (Any, Create, Update, Delete, Approve, Reject, Cancel, Entitlement, Adjustment, Rollover, Import, Staff, Recount, Bank holiday) or type in "Search the summary or who made the change". There is no filter by person or by date. Click a row to see the "Before" and "After" detail.</p>
+        <p>Deleted records keep a copy here with the notes and reasons blanked out, so a deleted record cannot be fully restored from the audit trail.</p>
+      </div>
+      <div class="refcard">
+        <h3>Export tab</h3>
+        <p>Two buttons for the chosen year. <span class="btn">Download people and balances</span> gives <strong>holiday-people-2026-27.csv</strong>: one row per person (inactive people included) with name, email, department, region, employment type, active and tracks-allowance (Yes/No), base days, adjustments, and the eight balance figures. <span class="btn">Download all leave records</span> gives <strong>holiday-leave-2026-27.csv</strong>: every record starting in the year, any status, with name, email, type, status, source, start, end, working days, region used, approver, who decided and when.</p>
+        <p>Dates in the files are written year-month-day. HR notes, reasons and decision notes are not exported. The files open in Excel. You see "Downloaded {filename} (N rows)." when done.</p>
+      </div>
+    </div>
+
+    <div class="callout free" style="background:var(--st-rejected-soft);border:1px solid var(--st-rejected-border)"><strong style="color:var(--st-rejected-ink)">Confidential</strong>As the tab says: "These files contain names, emails and sick leave. Keep them with HR's other confidential records and delete them when you are finished."</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 11. STARTERS AND LEAVERS ================= -->
+  <section class="module" id="starters-leavers">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>New starters and leavers</h2>
+    </div>
+    <p class="module-intro">What happens by itself every morning, and the parts HR must still do by hand.</p>
+
+    <div class="flow">
+      <p><strong>Each morning at 06:00</strong> the daily sync with the staff directory reads the two team groups (LBG Support and Office &amp; Installation).</p>
+      <p><strong>New team members are added automatically</strong> as Active, with the department of their team group (LBG Support if they are in both), region <strong>England and Wales</strong>, type Employee, tracking an allowance, and not approving their own leave. <strong>No allowance is created</strong>: their Entitlement shows "—".</p>
+      <p><strong>People who have dropped out of both groups are marked Inactive</strong> (only if the sync had seen them in a group before). Nobody is ever deleted. Someone HR has added by hand is never switched off before they have appeared in a group.</p>
+      <p><strong>HR is emailed a summary</strong> ("Holiday staff directory: N new, M left") only on days when something changed. The sync does not reactivate someone who comes back, and does not update an existing person's name, email, department or region.</p>
+    </div>
+
+    <div class="callout free" style="background:var(--st-approved-soft);border:1px solid var(--st-approved-border)"><strong style="color:var(--st-approved-ink)">Safety rules</strong>If either team group comes back empty, or cannot be read, nothing changes. If more than 5 people appear to have left in one morning, <strong>nobody is deactivated</strong>; HR gets an email marked "CHECK GROUPS" asking you to check the groups and then deactivate real leavers in the portal yourselves. New starters are still added.</div>
+
+    <div class="path">
+      <div class="path-head">
+        <span class="icon">👋</span>
+        <h3>What HR does for a new starter</h3>
+        <span class="tag">Web only</span>
+      </div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Find them on the People tab</strong><span>They appear the morning after they are added to their team group. Not there? Use <span class="btn">+ Add person</span>.</span></div></li>
+        <li><div class="step-body"><strong>Set their allowance</strong><span>Open them, enter <strong>Base days</strong> on the Allowance card, press <span class="btn">Save allowance</span>. For a part-year starter, add a Pro rata adjustment with a reason rather than changing the base.</span></div></li>
+        <li><div class="step-body"><strong>Set their Region if it is not England and Wales</strong><span>Profile card, choose Scotland or Northern Ireland, <span class="btn">Save profile</span>. Until you do, their leave is counted with England and Wales bank holidays.</span></div></li>
+        <li><div class="step-body"><strong>Check the rest of the profile</strong><span>Department, employment type, start date, and the tick boxes.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="flow">
+      <p><strong>For a leaver:</strong> normally the sync marks them Inactive the morning after they leave the team group. To do it yourself, open them, untick <span class="btn">Active</span>, press <span class="btn">Save profile</span>. Inactive people are hidden from the People grid unless "Show inactive" is ticked, are left out of the year rollover, and still appear in the people export. You can still record leave for them with the "Enter it anyway: this person is inactive" box.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 12. EVERYDAY RECIPES ================= -->
+  <section class="module" id="recipes">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Everyday recipes</h2>
+    </div>
+    <p class="module-intro">The common jobs, in order. Each one assumes you have opened the HR Portal.</p>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">🏖️</span><h3>Record a holiday for someone</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>People › click their name</strong><span>Check the year picker shows the year the holiday starts in.</span></div></li>
+        <li><div class="step-body"><strong>+ Add leave</strong><span>Annual leave is already chosen. Type the Start and End dates (dd/mm/yyyy). Check the working-day line.</span></div></li>
+        <li><div class="step-body"><strong>Add leave</strong><span>It is saved as Approved and goes on the team calendar. Let the person know, as the portal does not.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">🤒</span><h3>Record a sick day</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>People › click their name › + Add sick days</strong><span>Sick leave is already chosen.</span></div></li>
+        <li><div class="step-body"><strong>Enter the dates</strong><span>Same date in Start and End for a single day. Add an HR note if you want one; a note is required if the day has no working days (for example a weekend), together with the "no working days" box.</span></div></li>
+        <li><div class="step-body"><strong>Add leave</strong><span>It counts in "Sick used", not against the holiday allowance. It appears on the team calendar as "{Name} - Sick Leave".</span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">✏️</span><h3>A colleague asks to change the dates of a request they submitted</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Open the person and find the request in the ledger</strong><span>It has the <span class="chip muted">App</span> chip. Its dates cannot be edited by HR.</span></div></li>
+        <li><div class="step-body"><strong>Cancel request</strong><span>Enter a reason (the person is sent it, for example "Dates changed at your request; new dates entered by HR"). Press <span class="btn">Cancel request</span>.</span></div></li>
+        <li><div class="step-body"><strong>+ Add leave with the new dates</strong><span>Or ask them to submit a new request from the app so their manager approves it as usual.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">📆</span><h3>Leave that spans two holiday years</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Add it as one record</strong><span>The form warns "This leave crosses 31 March…". Save it.</span></div></li>
+        <li><div class="step-body"><strong>Press Split on the row</strong><span>Confirm "Split this leave at 31 March into two records?". The part from 1 April now counts in the new year. You see "Split at 31 March: X + Y working days."</span></div></li>
+        <li><div class="step-body"><strong>Check the new year</strong><span>Change the year picker and re-open the person to see the second record.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">🆕</span><h3>Set up a new starter</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Wait for the morning sync, or + Add person</strong><span>See <a href="#starters-leavers" style="color:var(--ink)">Starters and leavers</a>.</span></div></li>
+        <li><div class="step-body"><strong>Allowance card › Base days › Save allowance</strong><span>Their Entitlement, Remaining and Available now show numbers.</span></div></li>
+        <li><div class="step-body"><strong>Profile card › Region (if needed) › Save profile</strong><span></span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">🏴</span><h3>A Scottish or Northern Irish colleague</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Profile card › choose Scotland or Northern Ireland › Save profile</strong><span>Their bank holidays are now taken off their leave.</span></div></li>
+        <li><div class="step-body"><strong>Recount any leave already saved</strong><span>Press <span class="btn">Recount</span> on each record in the ledger that might include a bank holiday. Records saved before the change keep the old count until you do.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">🎉</span><h3>Add a company-wide day off</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Bank holidays › "Add a bank holiday or company day"</strong><span>Date, Region, Title › <span class="btn">Add bank holiday</span>.</span></div></li>
+        <li><div class="step-body"><strong>Repeat for each region</strong><span>One row covers one region.</span></div></li>
+        <li><div class="step-body"><strong>Recount anyone already booked off that day</strong><span>Leave records › set "Starts from" to about 60 days before the day and "Starts up to" to the day itself › <span class="btn">Apply filters</span> › check each record that covers the day (the filters only match start dates) › <span class="btn">Open person</span> › <span class="btn">Recount</span>.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">🔁</span><h3>End-of-year rollover</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>From 1 February: Year rollover tab</strong><span>Check the suggested next-year base and carry-over for each person; adjust as needed.</span></div></li>
+        <li><div class="step-body"><strong>Confirm rollover</strong><span>Do this before 1 April, or the automatic fallback creates rows with no carry-over.</span></div></li>
+        <li><div class="step-body"><strong>Afterwards</strong><span>Any correction is made on the person's page: base days on the Allowance card, carry-over as an adjustment.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="icon">🧮</span><h3>Correct a wrong balance</h3></div>
+      <ol class="steps">
+        <li><div class="step-body"><strong>Check the ledger first</strong><span>Is a record missing, duplicated, or counted with the wrong days? Fix the record (Edit, Delete, Recount) if so.</span></div></li>
+        <li><div class="step-body"><strong>If the allowance itself is wrong</strong><span>Allowance card: either fix the Base days and <span class="btn">Save allowance</span>, or add an adjustment with kind <strong>Correction</strong>, the days (+ or −) and a reason, then <span class="btn">Add adjustment</span>.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 13. GOOD TO KNOW ================= -->
+  <section class="module" id="good-to-know">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Good to know</h2>
+    </div>
+    <p class="module-intro">The things that catch people out. None of them are faults; they are just how the portal works today.</p>
+
+    <div class="cardset">
+      <div class="refcard"><h3>HR-entered leave sends the person nothing</h3><p>No email, no invite, no notification. It does go on the shared team calendar, and a sick day shows there as "{Name} - Sick Leave". Approving, rejecting or cancelling a request on someone's behalf <em>does</em> email them.</p></div>
+      <div class="refcard"><h3>An overlap needs a note</h3><p>The note box says "optional", but if you tick "Enter it anyway: it overlaps other leave" without a note the save is refused. A 0-working-day sick day needs a note too.</p></div>
+      <div class="refcard"><h3>The confirm boxes only appear after a refusal</h3><p>Press the button, read the message, tick the box, press again.</p></div>
+      <div class="refcard"><h3>Approving never checks the balance</h3><p>Look at Available before you approve.</p></div>
+      <div class="refcard"><h3>No end-date check on Approve or Cancel</h3><p>HR can approve or cancel leave whose dates have passed. Staff cannot cancel finished leave themselves.</p></div>
+      <div class="refcard"><h3>HR cannot edit an App request's dates</h3><p>Only Recount, Approve, Reject or Cancel. To change dates, cancel it with a reason and add HR leave.</p></div>
+      <div class="refcard"><h3>Leave lands in the year it starts</h3><p>The add form has no year field. If you are viewing 2026-27 and add leave starting in April 2027, it is saved but appears under 2027-28.</p></div>
+      <div class="refcard"><h3>Recount is one record at a time</h3><p>After a bank-holiday or region change, there is no "recount everyone" button. A recount changes only the stored days, not calendar entries: to refresh the calendar on HR-entered leave, use Edit.</p></div>
+      <div class="refcard"><h3>"Last synced from gov.uk" is the date of the newest gov.uk row</h3><p>Not the date of the last weekly check. A check that finds nothing new does not move it. gov.uk rows cannot be removed or edited from the portal.</p></div>
+      <div class="refcard"><h3>New starters default to England and Wales with no allowance</h3><p>Set Region and Base days yourself.</p></div>
+      <div class="refcard"><h3>Switching someone back to Active can be undone by the sync</h3><p>If you tick Active for someone who is in neither team group, the next morning's sync turns them off again. They need to be back in a team group.</p></div>
+      <div class="refcard"><h3>Who is off includes sick leave</h3><p>It lists every approved type, so sick days show there too.</p></div>
+      <div class="refcard"><h3>Open person can be greyed out</h3><p>On Leave records and Pending approvals the button is off when the person is not in the holiday system for the chosen year.</p></div>
+      <div class="refcard"><h3>The Audit search covers only what is loaded</h3><p>It searches the newest 200 rows (of the chosen kind), not the whole history.</p></div>
+      <div class="refcard"><h3>"Needs review" means an automatic row</h3><p>In practice the rows created on 1 April. Rollovers you confirm and allowances you save are already reviewed. Any Save allowance clears the chip, not only Mark as reviewed.</p></div>
+      <div class="refcard"><h3>A profile's email and start date cannot be cleared</h3><p>Leaving either blank keeps the old value. Notes can be cleared.</p></div>
+      <div class="refcard"><h3>Delete is permanent</h3><p>The audit trail keeps the dates, type, days and status, but not the notes or reasons.</p></div>
+      <div class="refcard"><h3>The Audit tab shows the newest 200 only</h3><p>And filters by kind of change or free text, not by person or date.</p></div>
+      <div class="refcard"><h3>Pending approvals ignores the year picker</h3><p>It always shows every waiting request, oldest first.</p></div>
+      <div class="refcard"><h3>A few date messages say yyyy-MM-dd</h3><p>One or two messages mention dates as year-month-day even though you type dd/mm/yyyy on the web. On the phone, use the date picker.</p></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= STATUS KEY ================= -->
+  <section class="module" id="status-key">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Status key</h2>
+    </div>
+    <div class="statuses">
+      <div class="status-card"><span class="chip" style="color:var(--st-pending-ink);background:var(--st-pending-soft);border:1px solid var(--st-pending-border)">Pending</span><p>Waiting for a decision. Counts in "Pending", not "Used". HR can Approve, Reject or Cancel it.</p></div>
+      <div class="status-card"><span class="chip" style="color:var(--st-approved-ink);background:var(--st-approved-soft);border:1px solid var(--st-approved-border)">Approved</span><p>On the team calendar and counted in "Used" (Annual) or the Sick, Unpaid or Other totals. All HR-entered leave is Approved.</p></div>
+      <div class="status-card"><span class="chip" style="color:var(--st-rejected-ink);background:var(--st-rejected-soft);border:1px solid var(--st-rejected-border)">Rejected</span><p>Turned down. Counts for nothing. A closed record: it cannot be edited or split.</p></div>
+      <div class="status-card"><span class="chip" style="color:var(--st-cancelled-ink);background:var(--st-cancelled-soft);border:1px solid var(--st-cancelled-border)">Cancelled</span><p>Withdrawn by the person or by HR. Counts for nothing. Also a closed record.</p></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 14. MESSAGES ================= -->
+  <section class="module" id="messages">
+    <div class="module-head">
+      <span class="dot" style="background:var(--hol-ink)"></span>
+      <h2>Messages and what to do</h2>
+    </div>
+    <p class="module-intro">The sentences you are most likely to see, and what they mean.</p>
+
+    <div class="tablewrap">
+      <table class="ref">
+        <thead><tr><th>Message</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td class="msg">"You're not in the HR group."</td><td>Your account is not in the HR group, or your membership has not reached the portal yet. Contact IT.</td></tr>
+          <tr><td class="msg">"Your sign-in has expired. Sign in again."</td><td>Sign out of the app and back in.</td></tr>
+          <tr><td class="msg">"Couldn't load that. Try again."</td><td>Press <span class="btn">Try again</span>. If it keeps happening, contact IT.</td></tr>
+          <tr><td class="msg">"Could not reach the server. Check your connection and try again."</td><td>Check you are online, then try again.</td></tr>
+          <tr><td class="msg">"Couldn't confirm the save. Check the person's ledger before trying again."</td><td>The save may or may not have gone through. Open the person's ledger and look before pressing the button again, so you do not create a duplicate. This is also what you see when a save failed outright.</td></tr>
+          <tr><td class="msg">"That overlaps leave this person already has. Confirm to enter it anyway."</td><td>Check the ledger. If it is genuinely wanted, add an HR note explaining why, tick "Enter it anyway: it overlaps other leave" and save again.</td></tr>
+          <tr><td class="msg">"An overlapping record needs a note saying why."</td><td>Type a reason in "HR note (optional)" and save again.</td></tr>
+          <tr><td class="msg">"That range has no working days. Only a sick day with a note can be entered as 0 days."</td><td>For a holiday, check the dates (weekend or bank holiday?). For a sick day you really want to record, add a note and tick "Enter it anyway: no working days (sick days only, with a note)".</td></tr>
+          <tr><td class="msg">"That person is not active. Confirm to enter leave for an inactive person."</td><td>If you mean to record leave for a leaver, tick "Enter it anyway: this person is inactive" and save again.</td></tr>
+          <tr><td class="msg">"Leave can't run longer than 60 days."</td><td>Enter it as two or more shorter records.</td></tr>
+          <tr><td class="msg">"Splitting would leave a part with no working days. Edit the dates instead."</td><td>The part after 31 March has no working days. Edit the dates rather than splitting.</td></tr>
+          <tr><td class="msg">"That person has no sign-in id yet, so leave cannot be recorded for them."</td><td>Contact IT: the person's account is not fully set up in the holiday system.</td></tr>
+          <tr><td class="msg">"Choose a department." / "Choose a region."</td><td>A profile needs both before it can be saved.</td></tr>
+          <tr><td class="msg">"The end date can't be before the start date."</td><td>Swap or correct the dates.</td></tr>
+          <tr><td class="msg">"Enter real start and end dates (dd/mm/yyyy)."</td><td>Type the dates in full, for example 05/01/2027.</td></tr>
+          <tr><td class="msg">"Someone else changed this request while you were working. Reload to see where it stands."</td><td>The manager (or someone else) answered first. Reload; nothing was changed by you.</td></tr>
+          <tr><td class="msg">"Only a pending request can be decided (it is Approved)."</td><td>The manager (or someone else) already answered. Nothing was changed; the list reloads. Same for "(it is Rejected)." and, when cancelling, "Only a pending or approved request can be cancelled (it is …)."</td></tr>
+          <tr><td class="msg">"You can't approve or reject your own request. Ask another HR member."</td><td>Exactly that. Another HR member can decide it.</td></tr>
+          <tr><td class="msg">"HR-entered leave is changed with Edit or Delete. Only a request someone submitted can be approved or rejected."</td><td>Use <span class="btn">Edit</span> or <span class="btn">Delete</span> on that row.</td></tr>
+          <tr><td class="msg">"Only pending or approved leave can be changed. Cancelled or rejected leave is a closed record."</td><td>Add a new record instead.</td></tr>
+          <tr><td class="msg">"That leave record couldn't be found. It may have been deleted."</td><td>Reload the page; someone may have deleted it meanwhile.</td></tr>
+          <tr><td class="msg">"Save the allowance for this year before adding an adjustment."</td><td>You should not normally see this (the button stays off). Enter Base days and <span class="btn">Save allowance</span>, then add the adjustment.</td></tr>
+          <tr><td class="msg">"There is no allowance for this year to review yet."</td><td>You should not normally see this (the button stays off). Enter Base days and <span class="btn">Save allowance</span>; that also marks it reviewed.</td></tr>
+          <tr><td class="msg">"That person is already in the holiday system."</td><td>Tick "Show inactive" and search for them; they may be there already.</td></tr>
+          <tr><td class="msg">"That date is already a bank holiday for that region."</td><td>Nothing to do; it is already in the list.</td></tr>
+          <tr><td class="msg">"Only holidays added by HR can be deleted. GOV.UK holidays come from the weekly sync."</td><td>gov.uk rows cannot be removed from the portal.</td></tr>
+          <tr><td class="msg">"That record is longer than the recount supports (61 days). Edit it instead."</td><td>Only old imported records can be this long. If it is HR-entered, <span class="btn">Edit</span> it into records of 60 days or less. If it is a request from the app, contact IT.</td></tr>
+          <tr><td class="msg">"Roll over at most 25 people at a time."</td><td>You should not normally see this; the tab sends people in batches of 25. Try again, or contact IT.</td></tr>
+          <tr><td class="msg">"The change was saved, but its audit row was not. The admin has been emailed."</td><td>Your change stands. IT already knows; nothing for you to do.</td></tr>
+          <tr><td class="msg">"The calendar could not be fully updated. The admin has been emailed; the change itself was saved."</td><td>The record is right; the calendar may be behind. IT has been told.</td></tr>
+          <tr><td class="msg">"No team calendar was found for this person (no department and not in a team group), so nothing was added to a calendar."</td><td>The record itself was saved but is on no calendar. Set the person's Department on the Profile card, then <span class="btn">Delete</span> the record and add it again so it goes on the calendar. Later records will be fine.</td></tr>
+          <tr><td class="msg">"The HR portal is not set up yet."</td><td>You should not normally see this: the HR tab stays hidden until it is. Contact IT.</td></tr>
+          <tr><td class="msg">"Another change is still saving. Try again in a moment."</td><td>Phone only. Wait a moment and try again.</td></tr>
+          <tr><td class="msg">"That took too long. Try again."</td><td>Phone only. Pull down to refresh and try again.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= FAQ ================= -->
+  <section class="module" id="faq">
+    <div class="module-head">
+      <span class="dot" style="background:var(--muted)"></span>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Someone's Entitlement shows "—". Why?</summary><p class="a">They have no allowance for that year yet, do not track an allowance, or have no base days. Open them and enter Base days on the Allowance card.</p></details>
+      <details><summary>Does a sick day come off the holiday allowance?</summary><p class="a">No. Only Annual leave does. Sick, Unpaid and Other are totalled separately.</p></details>
+      <details><summary>Why has nothing changed after I added a bank holiday?</summary><p class="a">Records already saved keep their working days. Press Recount on each one that includes the date.</p></details>
+      <details><summary>Will the person know I have recorded their leave?</summary><p class="a">Not from the portal. HR-entered leave sends no email or notification. It appears in their My Requests marked "Entered by HR". Tell them yourself if they need to know.</p></details>
+      <details><summary>Can I change a request someone submitted from the app?</summary><p class="a">You can approve, reject or cancel it (with a reason they are sent), and recount it. You cannot change its dates: cancel it and add HR leave, or ask them to submit a new request.</p></details>
+      <details><summary>What does the "Needs review" chip mean?</summary><p class="a">That year's allowance was created automatically (for example by the 1 April fallback) and nobody has checked it. Open the person, check the Base days, and either Save allowance or Mark as reviewed.</p></details>
+      <details><summary>I am HR and I submitted my own request. Can I approve it?</summary><p class="a">Not if it has a manager on record. Ask another HR member, or wait for your manager.</p></details>
+      <details><summary>I cannot see the HR portal button on my phone.</summary><p class="a">Sign out and back in once if you were added to the HR group recently. The Holiday tile itself only opens for people in one of the two team groups; if you are in neither, use the web portal.</p></details>
+      <details><summary>Can I undo a Delete?</summary><p class="a">No. The audit trail records that it happened, with the dates, type, days and status, but the notes are gone. Add the leave again if it was a mistake.</p></details>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= 15. GETTING HELP ================= -->
+  <section class="module" id="help">
+    <div class="module-head">
+      <span class="dot" style="background:var(--muted)"></span>
+      <h2>Getting help</h2>
+    </div>
+    <div class="flow">
+      <p>If a number looks wrong, check the person's ledger and adjustments first; most puzzles are a record in the wrong year, a missing allowance, or a count that needs a Recount.</p>
+      <p>If something still looks wrong, if you see an error that keeps coming back, or if you need someone added to or removed from the HR group, <strong>contact IT</strong>. Say which person and which year you were looking at, and what you pressed.</p>
+      <p>For requesting your own leave, see the <a href="help.html#holiday" style="color:var(--ink)">main guide</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="help.html#holiday">‹ Back to the main guide</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
