@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Room Checker: adding and naming rooms</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    /* Neutral chrome -- not tied to any one module's brand */
+    --bg: #F3F3F0;
+    --surface: #FFFFFF;
+    --surface-2: #F7F7F4;
+    --border: #E2E2DD;
+    --ink: #1C1C19;
+    --muted: #63645D;
+    --eyebrow: #8D8E86;
+    --shadow: 0 1px 2px rgba(20,20,16,0.04), 0 8px 24px rgba(20,20,16,0.05);
+    --radius: 14px;
+
+    /* Room Checker -- the app's own LBG-green tile colour */
+    --rc-ink: #05643F;
+    --rc-soft: #E4F3EC;
+    --rc-border: #BEE0CE;
+
+    /* Warehouse Asset -- the app's own blue tile colour */
+    --wh-ink: #0B4FCC;
+    --wh-soft: #E7EEFC;
+    --wh-border: #C4D6F7;
+
+    /* Holiday Request -- the app's own amber tile colour */
+    --hol-ink: #A85A17;
+    --hol-soft: #FDEEE0;
+    --hol-border: #F1CFA4;
+
+    /* LBG Support / Office & Install pills, inside Holiday Request only */
+    --lbg-ink: #05643F;
+    --lbg-soft: #E4F3EC;
+    --lbg-border: #BEE0CE;
+    --oi-ink: #0B4FCC;
+    --oi-soft: #E7EEFC;
+    --oi-border: #C4D6F7;
+
+    /* Status semantics -- traffic-light convention, not brand colour */
+    --st-pending-ink: #A85A17;
+    --st-pending-soft: #FBF0E1;
+    --st-pending-border: #E9CFA6;
+    --st-approved-ink: #1E7A46;
+    --st-approved-soft: #E7F5EC;
+    --st-approved-border: #BEDDC9;
+    --st-rejected-ink: #A6392E;
+    --st-rejected-soft: #FBECEA;
+    --st-rejected-border: #E9C2BC;
+    --st-cancelled-ink: #63645D;
+    --st-cancelled-soft: #EDEDEA;
+    --st-cancelled-border: #D6D6D0;
+
+    /* Coming-soon modules -- their real (unused) tile colours, low-key */
+    --cp-ink: #A6392E;
+    --so-ink: #6B3FB0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131311;
+      --surface: #1C1C19;
+      --surface-2: #201F1C;
+      --border: #322F29;
+      --ink: #EDEDE8;
+      --muted: #9C9C94;
+      --eyebrow: #7C7C74;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+      --rc-ink: #3FCB9B;
+      --rc-soft: #16281F;
+      --rc-border: #2E4A3A;
+
+      --wh-ink: #6E9CF2;
+      --wh-soft: #172038;
+      --wh-border: #2E3E5E;
+
+      --hol-ink: #E8A461;
+      --hol-soft: #2A2015;
+      --hol-border: #4A3A24;
+
+      --lbg-ink: #3FCB9B;
+      --lbg-soft: #16281F;
+      --lbg-border: #2E4A3A;
+      --oi-ink: #6E9CF2;
+      --oi-soft: #172038;
+      --oi-border: #2E3E5E;
+
+      --st-pending-ink: #E8A461;
+      --st-pending-soft: #2A2015;
+      --st-pending-border: #4A3A24;
+      --st-approved-ink: #3FBE7B;
+      --st-approved-soft: #17281E;
+      --st-approved-border: #2E4A38;
+      --st-rejected-ink: #E68F84;
+      --st-rejected-soft: #2A1917;
+      --st-rejected-border: #4A2C27;
+      --st-cancelled-ink: #9C9C94;
+      --st-cancelled-soft: #201F1C;
+      --st-cancelled-border: #34332D;
+
+      --cp-ink: #E68F84;
+      --so-ink: #B39CE8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131311;
+    --surface: #1C1C19;
+    --surface-2: #201F1C;
+    --border: #322F29;
+    --ink: #EDEDE8;
+    --muted: #9C9C94;
+    --eyebrow: #7C7C74;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+
+    --rc-ink: #3FCB9B;
+    --rc-soft: #16281F;
+    --rc-border: #2E4A3A;
+
+    --wh-ink: #6E9CF2;
+    --wh-soft: #172038;
+    --wh-border: #2E3E5E;
+
+    --hol-ink: #E8A461;
+    --hol-soft: #2A2015;
+    --hol-border: #4A3A24;
+
+    --lbg-ink: #3FCB9B;
+    --lbg-soft: #16281F;
+    --lbg-border: #2E4A3A;
+    --oi-ink: #6E9CF2;
+    --oi-soft: #172038;
+    --oi-border: #2E3E5E;
+
+    --st-pending-ink: #E8A461;
+    --st-pending-soft: #2A2015;
+    --st-pending-border: #4A3A24;
+    --st-approved-ink: #3FBE7B;
+    --st-approved-soft: #17281E;
+    --st-approved-border: #2E4A38;
+    --st-rejected-ink: #E68F84;
+    --st-rejected-soft: #2A1917;
+    --st-rejected-border: #4A2C27;
+    --st-cancelled-ink: #9C9C94;
+    --st-cancelled-soft: #201F1C;
+    --st-cancelled-border: #34332D;
+
+    --cp-ink: #E68F84;
+    --so-ink: #B39CE8;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 28px 16px 64px;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; }
+
+  /* ---------- Header ---------- */
+  .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .masthead img { height: 26px; width: auto; display: block; }
+  .masthead .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--eyebrow); }
+
+  /* Logo wordmark is white text -- swap to the dark-text variant on a light background.
+     Selector must be at least as specific as ".masthead img" above, or that rule's
+     own display:block wins regardless of source order. */
+  .masthead img.logo-dark { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .masthead img.logo-light { display: none; }
+    :root:not([data-theme="light"]) .masthead img.logo-dark { display: block; }
+  }
+  :root[data-theme="dark"] .masthead img.logo-light { display: none; }
+  :root[data-theme="dark"] .masthead img.logo-dark { display: block; }
+
+  .title-block h1 { font-family: "Archivo Expanded", "IBM Plex Sans", sans-serif; font-weight: 800; font-size: clamp(26px, 6vw, 36px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 10px; text-wrap: balance; color: var(--ink); }
+  .title-block p { margin: 0; color: var(--muted); font-size: 16px; max-width: 58ch; }
+
+  /* ---------- Quick nav ---------- */
+  nav.jump { display: flex; flex-wrap: wrap; gap: 8px; }
+  nav.jump a {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  nav.jump a:hover { border-color: var(--muted); }
+  nav.jump a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  nav.jump .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ---------- Module section shell ---------- */
+  .module { scroll-margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .module-head { display: flex; align-items: baseline; gap: 10px; }
+  .module-head .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-bottom: 2px; }
+  .module-head h2 { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 22px; margin: 0; letter-spacing: -0.005em; }
+  .module-head .status-tag {
+    margin-left: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .module-intro { margin: -4px 0 0; color: var(--muted); font-size: 14.5px; max-width: 62ch; }
+
+  /* ---------- Reference cards (tab-style, unordered) ---------- */
+  .cardset { display: flex; flex-direction: column; gap: 10px; }
+  .refcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 15px 18px;
+  }
+  .refcard h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+  .refcard p { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+  .refcard p:last-child { margin-bottom: 0; }
+
+  /* ---------- Numbered steps (real sequences only) ---------- */
+  .path { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .path-head { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+  .path-head .icon { font-size: 18px; line-height: 1; }
+  .path-head h3 { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 16px; margin: 0; }
+  .path-head .tag { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+
+  .steps { list-style: none; margin: 0; padding: 4px 20px 16px; counter-reset: step; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 26px 1fr; gap: 13px; padding: 10px 0; }
+  .steps li + li { border-top: 1px dashed var(--border); }
+  .steps li::before {
+    content: counter(step);
+    font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 12.5px;
+    color: var(--ink); background: var(--surface-2); border: 1px solid var(--border);
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .steps .step-body strong { display: block; font-weight: 600; margin-bottom: 2px; font-size: 14.5px; }
+  .steps .step-body span { color: var(--muted); font-size: 14px; }
+  .steps .step-body code { font-family: "IBM Plex Mono", monospace; font-size: 0.9em; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; }
+
+  .pill { display: inline-flex; align-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+
+  .callout { margin: 0 20px 16px; padding: 12px 15px; border-radius: 10px; font-size: 14px; }
+  .callout strong { display: block; margin-bottom: 2px; }
+
+  /* ---------- Flow / status / FAQ (Holiday Request shared reference) ---------- */
+  .subhead { font-family: "Archivo Expanded", sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--eyebrow); margin: 2px 0 -4px; }
+  .flow { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .flow p { margin: 0; font-size: 14.5px; }
+  .flow p strong { color: var(--ink); }
+
+  .statuses { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media (max-width: 480px) { .statuses { grid-template-columns: 1fr; } }
+  .status-card { border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; background: var(--surface-2); }
+  .status-card .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .status-card p { margin: 0; font-size: 13px; color: var(--muted); }
+
+  .faq { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 4px 20px 6px; }
+  .faq details { border-top: 1px dashed var(--border); padding: 13px 0; }
+  .faq details:first-child { border-top: none; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14.5px; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: "IBM Plex Mono", monospace; color: var(--muted); font-size: 17px; line-height: 1; flex-shrink: 0; }
+  .faq details[open] summary::after { content: "\2212"; }
+  .faq summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  .faq .a { margin: 9px 0 0; color: var(--muted); font-size: 14px; }
+
+  /* ---------- Coming soon strip ---------- */
+  .soon-row { display: flex; flex-direction: column; gap: 8px; }
+  .soon-card { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 13px 16px; }
+  .soon-card .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .soon-card strong { font-size: 14.5px; }
+  .soon-card span { color: var(--muted); font-size: 13.5px; margin-left: auto; }
+
+  hr.rule { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
+
+  footer { text-align: center; padding-top: 6px; color: var(--muted); font-size: 13.5px; }
+  footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  footer a:hover { border-bottom-color: var(--muted); }
+
+  /* ---------- Extras for this guide only ---------- */
+  .masthead .back { font-size: 13px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .masthead .back:hover { border-bottom-color: var(--muted); }
+  .masthead .right { display: flex; align-items: center; gap: 14px; }
+  @media (max-width: 480px) { .masthead .eyebrow { display: none; } }
+
+  .callout.free { margin: 0; }
+  .flow ul, .refcard ul { margin: 0; padding-left: 20px; font-size: 14px; color: var(--muted); }
+  .flow ul { font-size: 14.5px; color: var(--ink); }
+  .flow li + li, .refcard li + li { margin-top: 4px; }
+  .flow p.lead { color: var(--muted); }
+
+  .btn { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.86em; font-weight: 600; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 7px; border-radius: 6px; white-space: nowrap; color: var(--ink); }
+  .msg { font-style: italic; }
+  .refcard .btn, .flow .btn, td .btn { color: var(--ink); }
+
+  .tablewrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow-x: auto; }
+  table.ref { border-collapse: collapse; width: 100%; font-size: 14px; }
+  table.ref th, table.ref td { text-align: left; vertical-align: top; padding: 10px 14px; border-top: 1px solid var(--border); }
+  table.ref thead th { border-top: none; background: var(--surface-2); font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+  table.ref td { color: var(--muted); }
+  table.ref td:first-child { color: var(--ink); font-weight: 600; }
+  table.ref caption { caption-side: top; text-align: left; padding: 12px 14px 6px; font-size: 13px; color: var(--muted); }
+
+  .chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; vertical-align: middle; }
+  .chip.pending { color: var(--st-pending-ink); background: var(--st-pending-soft); border: 1px solid var(--st-pending-border); }
+  .chip.approved { color: var(--st-approved-ink); background: var(--st-approved-soft); border: 1px solid var(--st-approved-border); }
+  .chip.rejected { color: var(--st-rejected-ink); background: var(--st-rejected-soft); border: 1px solid var(--st-rejected-border); }
+  .chip.cancelled { color: var(--st-cancelled-ink); background: var(--st-cancelled-soft); border: 1px solid var(--st-cancelled-border); }
+  .chip.accent { color: var(--hol-ink); background: var(--hol-soft); border: 1px solid var(--hol-border); }
+  .chip.muted { color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
+
+  .example { background: var(--hol-soft); border: 1px solid var(--hol-border); border-radius: 10px; padding: 12px 15px; font-size: 14px; }
+  .example strong { color: var(--hol-ink); display: block; margin-bottom: 4px; }
+  .example table { border-collapse: collapse; margin-top: 6px; }
+  .example td { padding: 2px 14px 2px 0; }
+  .example td:last-child { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <img class="logo-light" src="av-team-mark-onlight.png" alt="AV-Team">
+    <img class="logo-dark" src="av-team-mark.png" alt="AV-Team">
+    <div class="right">
+      <span class="eyebrow">Room&nbsp;Checker&nbsp;Guide</span>
+      <a class="back" href="help.html">‹ Back to the main guide</a>
+    </div>
+  </div>
+
+  <div class="title-block">
+    <h1>Adding rooms and naming them</h1>
+    <p>How a room is named in LBG Room Checker, and how to add one on the website. Get the name right and the equipment import finds the room by itself.</p>
+  </div>
+
+  <div class="callout free" style="background:var(--rc-soft);border:1px solid var(--rc-border)"><strong style="color:var(--rc-ink)">Who this is for</strong>Estate managers. Adding, renaming and deleting rooms is only available to the Estate Manager group on the Room Checker website.</div>
+
+  <nav class="jump" aria-label="Jump to section">
+    <a href="#pattern"><span class="dot" style="background:var(--rc-ink)"></span>The naming pattern</a>
+    <a href="#parts"><span class="dot" style="background:var(--rc-ink)"></span>The four parts</a>
+    <a href="#examples"><span class="dot" style="background:var(--rc-ink)"></span>Real examples</a>
+    <a href="#add"><span class="dot" style="background:var(--rc-ink)"></span>Adding a room</a>
+    <a href="#building"><span class="dot" style="background:var(--rc-ink)"></span>New building or site</a>
+    <a href="#rules"><span class="dot" style="background:var(--rc-ink)"></span>Rules and checklist</a>
+    <a href="#fix"><span class="dot" style="background:var(--rc-ink)"></span>Fixing a name</a>
+    <a href="#faq"><span class="dot" style="background:var(--muted)"></span>FAQ</a>
+  </nav>
+
+  <!-- ================= 1. THE PATTERN ================= -->
+  <section class="module" id="pattern">
+    <div class="module-head">
+      <span class="dot" style="background:var(--rc-ink)"></span>
+      <h2>The naming pattern</h2>
+      <span class="status-tag" style="color:var(--rc-ink);background:var(--rc-soft);border:1px solid var(--rc-border)">Standard</span>
+    </div>
+    <p class="module-intro">Every room is named in four parts, in this order, with a space-dash-space between them.</p>
+
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>The pattern, with a real room</caption>
+        <thead><tr><th>1. Type</th><th>2. Site</th><th>3. Building</th><th>4. Room</th></tr></thead>
+        <tbody>
+          <tr><td><code>$MTR</code></td><td><code>AND</code></td><td><code>Keens House</code></td><td><code>R01-01</code></td></tr>
+          <tr><td>What kind of room</td><td>Which city or site</td><td>Which building</td><td>Floor and room number</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="background:var(--rc-soft);border:1px solid var(--rc-border)"><strong style="color:var(--rc-ink)">Written out in full</strong><code>$MTR - AND - Keens House - R01-01</code>. The first three parts on their own, <code>$MTR - AND - Keens House</code>, name the building; the fourth part says which room in it.</div>
+
+    <div class="callout" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Why the exact name matters</strong>The name is the room's identity everywhere. When you upload the equipment export on the Import tab, each row's <em>Display name</em> is matched to a room by this name. If the room is called something slightly different, the row comes up as <strong>unmatched</strong> and someone has to pick the room by hand. The room's code (used on checks and faults) is also worked out from the name.</div>
+  </section>
+
+  <!-- ================= 2. THE FOUR PARTS ================= -->
+  <section class="module" id="parts">
+    <div class="module-head">
+      <span class="dot" style="background:var(--rc-ink)"></span>
+      <h2>The four parts</h2>
+    </div>
+
+    <div class="subhead">1. Type: the prefix</div>
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>Starts with a dollar sign, then a short code</caption>
+        <thead><tr><th>Prefix</th><th>What it is</th><th>Room type in the app</th></tr></thead>
+        <tbody>
+          <tr><td><code>$MTR</code></td><td>A Microsoft Teams meeting room. By far the most common.</td><td>MTR (or GEC, GEC with IPTV, IPTV or Event Space where that applies: pick it on the form; the prefix stays <code>$MTR</code>)</td></tr>
+          <tr><td><code>$HUB</code></td><td>A Surface Hub (touch board)</td><td>SHUB</td></tr>
+          <tr><td><code>$WCS</code></td><td>A working café space</td><td>Working Café</td></tr>
+          <tr><td><code>$RES</code></td><td>A research lab</td><td>Research Labs</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="module-intro">The prefix is the first thing in the device's own display name, so keep it exactly as the device has it, including the <code>$</code>. The <strong>Room type</strong> you choose on the form is separate: it decides the inspection checklist.</p>
+
+    <div class="subhead">2. Site: the city or site code</div>
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>Codes in use today and the site name to pick on the form</caption>
+        <thead><tr><th>Code</th><th>Site</th><th>Code</th><th>Site</th></tr></thead>
+        <tbody>
+          <tr><td><code>AND</code></td><td>Andover</td><td><code>LDN</code></td><td>London</td></tr>
+          <tr><td><code>BAS</code></td><td>Basildon</td><td><code>LDS</code></td><td>Leeds</td></tr>
+          <tr><td><code>BEL</code></td><td>Belfast</td><td><code>MAN</code></td><td>Manchester</td></tr>
+          <tr><td><code>BHAM</code></td><td>Birmingham</td><td><code>NEWC</code></td><td>Newcastle</td></tr>
+          <tr><td><code>BRI</code></td><td>Bristol</td><td><code>NPT</code></td><td>Newport</td></tr>
+          <tr><td><code>CDF</code></td><td>Cardiff</td><td><code>PTB</code></td><td>Peterborough</td></tr>
+          <tr><td><code>CHS</code></td><td>Chester</td><td><code>REA</code></td><td>Reading</td></tr>
+          <tr><td><code>EDI</code></td><td>Edinburgh</td><td><code>HFX</code></td><td>Halifax</td></tr>
+          <tr><td><code>GLA</code></td><td>Glasgow</td><td><code>HOV</code></td><td>Hove</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="module-intro">A few branch sites use their own name instead of a code, for example <code>Poole</code>, <code>Woking</code>, <code>Gravesend</code> and <code>Oxford Street</code>. A brand-new city: use a short code the same way (three letters is the pattern), and tell the people who set up the devices what you chose, so the device's display name uses the same code.</p>
+
+    <div class="subhead">3. Building: the short building name</div>
+    <p class="module-intro">The building as it appears in the device's display name: <code>Keens House</code>, <code>33 OBS</code> (33 Old Broad Street), <code>CITYMARK</code>, <code>PEX</code>. Most names write it in capitals and some in normal case; either matches, because capitals are ignored when matching. The <em>Building</em> box on the form is different: that holds the building's full, tidy name (for example Princess Exchange).</p>
+
+    <div class="subhead">4. Room: the floor and room number</div>
+    <p class="module-intro">For ordinary meeting rooms: the letter <strong>R</strong>, the floor as two digits, a dash and the room number as two digits. <code>R01-01</code> is floor 1, room 01. <code>R05-13</code> is floor 5, room 13. The floor number inside this part is how the app works out the floor. Rooms that do not fit that shape exist (for example <code>R-PE - 00-03</code> or <code>Research Lab</code>): copy the device's display name exactly and fill in the Floor box yourself.</p>
+
+    <div class="callout" style="background:var(--st-pending-soft);border:1px solid var(--st-pending-border)"><strong style="color:var(--st-pending-ink)">Hubs have an extra floor part</strong>A Surface Hub is named <code>$HUB - EDI - SHN - 0 - Hub 2</code>: type, site, building, then the floor (<code>0</code>), then the hub number. Hubs move around, so their Floor in the app is <strong>MOBILE</strong>.</div>
+  </section>
+
+  <!-- ================= 3. EXAMPLES ================= -->
+  <section class="module" id="examples">
+    <div class="module-head">
+      <span class="dot" style="background:var(--rc-ink)"></span>
+      <h2>Real examples</h2>
+    </div>
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>Names that are live today, and what each part means</caption>
+        <thead><tr><th>Room name</th><th>Site</th><th>Building</th><th>Floor</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td><code>$MTR - AND - Keens House - R01-01</code></td><td>Andover</td><td>Keens House</td><td>1</td><td>MTR</td></tr>
+          <tr><td><code>$MTR - AND - Keens House - R02-07</code></td><td>Andover</td><td>Keens House</td><td>2</td><td>MTR</td></tr>
+          <tr><td><code>$MTR - LDN - 33 OBS - R05-13</code></td><td>London</td><td>33 Old Broad Street</td><td>5</td><td>MTR</td></tr>
+          <tr><td><code>$HUB - EDI - SHN - 0 - Hub 2</code></td><td>Edinburgh</td><td>Sighthill North</td><td>MOBILE</td><td>SHUB</td></tr>
+          <tr><td><code>$WCS - EDI - CITYMARK - Working Café</code></td><td>Edinburgh</td><td>Citymark</td><td>0</td><td>Working Café</td></tr>
+          <tr><td><code>$RES - HFX - TRINITY ROAD - Research Lab</code></td><td>Halifax</td><td>Trinity Road</td><td>0</td><td>Research Labs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= 4. ADDING A ROOM ================= -->
+  <section class="module" id="add">
+    <div class="module-head">
+      <span class="dot" style="background:var(--rc-ink)"></span>
+      <h2>Adding a room</h2>
+    </div>
+    <p class="module-intro">Use this when a room exists that is not on the website yet and you are adding it by hand.</p>
+    <div class="flow">
+      <ol class="steps">
+        <li><div class="step-body"><strong>Find the building</strong><span>On the <strong>Overview</strong> tab, find the site and the building the room belongs in. If the building is not there yet, do the next section first.</span></div></li>
+        <li><div class="step-body"><strong>Press + Add Room</strong><span>The button is inside that building's section, so the Site and Building are already filled in.</span></div></li>
+        <li><div class="step-body"><strong>Type the Room name</strong><span>The <strong>whole name</strong>, all four parts, exactly as the device calls itself: <code>$MTR - AND - Keens House - R01-01</code>. The box shows "e.g. Boardroom 3" as a placeholder, but do not use a plain name like that for a real room: it will never match an import.</span></div></li>
+        <li><div class="step-body"><strong>Choose the Floor</strong><span>For example <code>1</code>. Leave it blank if you do not know yet. Use <code>MOBILE</code> for a hub.</span></div></li>
+        <li><div class="step-body"><strong>Choose the Room type</strong><span>MTR, GEC, GEC with IPTV, IPTV, Event Space, Research Labs, SHUB, XL, Working Café or Other. This decides the inspection checklist.</span></div></li>
+        <li><div class="step-body"><strong>Choose how often it is checked</strong><span>Every Working Day, Twice Per Week, Weekly, Fortnight, Monthly, Quarterly, Yearly or Never (for a room on a "next day fix" contract with no regular checks).</span></div></li>
+        <li><div class="step-body"><strong>Save</strong><span>The room appears in the building straight away.</span></div></li>
+      </ol>
+      <div class="callout" style="background:var(--rc-soft);border:1px solid var(--rc-border)"><strong style="color:var(--rc-ink)">The room code is made for you</strong>The code is the name tidied up: the <code>$</code> is dropped, capital letters, and spaces and symbols become single dashes. <code>$MTR - AND - Keens House - R01-01</code> becomes <code>MTR-AND-KEENS-HOUSE-R01-01</code>. Two rooms cannot share a name, so use the full four-part name every time.</div>
+    </div>
+
+    <div class="subhead">Another way: from the equipment import</div>
+    <p class="module-intro">If you upload the equipment export on the <strong>Import</strong> tab and a row names a room that does not exist yet, the tab can propose creating it. It works the site, building, room type and a guess at the floor out from the name, and shows them to you to check before anything is written. A created room cannot be undone from that tab, so check the proposal carefully.</p>
+  </section>
+
+  <!-- ================= 5. NEW BUILDING / SITE ================= -->
+  <section class="module" id="building">
+    <div class="module-head">
+      <span class="dot" style="background:var(--rc-ink)"></span>
+      <h2>A new building or a new site</h2>
+    </div>
+    <div class="flow">
+      <ol class="steps">
+        <li><div class="step-body"><strong>New building in an existing site</strong><span>Press <span class="btn">+ Add Building</span>, pick the existing site, and type the building's name.</span></div></li>
+        <li><div class="step-body"><strong>New site (a new city)</strong><span>Press <span class="btn">+ Add City</span> and type the new site's name.</span></div></li>
+        <li><div class="step-body"><strong>Rename the placeholder room</strong><span>A building cannot exist with no rooms, so the website creates one placeholder room called <code>&lt;Building name&gt; - New Room</code> (room type Other). Open it, press <strong>Edit Room Details</strong> and give it the real four-part name, or add the real rooms with <span class="btn">+ Add Room</span> and delete the placeholder.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 6. RULES ================= -->
+  <section class="module" id="rules">
+    <div class="module-head">
+      <span class="dot" style="background:var(--rc-ink)"></span>
+      <h2>Rules and checklist</h2>
+    </div>
+    <div class="tablewrap">
+      <table class="ref">
+        <caption>Check the name before you save</caption>
+        <thead><tr><th>Do</th><th>Do not</th></tr></thead>
+        <tbody>
+          <tr><td>Copy the device's display name exactly.</td><td>Tidy it up or reword it. Even a small change means the import cannot find the room.</td></tr>
+          <tr><td>Put one space, a dash, one space between the parts: <code>A - B - C - D</code>.</td><td>Leave out a space: <code>Cawley House- P1</code> will not match. (Three rooms in the live list have this problem today.)</td></tr>
+          <tr><td>Keep the leading <code>$</code>.</td><td>Drop the prefix or write <code>MTR</code> without the dollar sign.</td></tr>
+          <tr><td>Use a plain hyphen <code>-</code>. A long dash (– or —) is treated the same as a hyphen when matching, but keep to the hyphen.</td><td>Type double spaces or leave a space at the end.</td></tr>
+          <tr><td>Use the full four-part name every time, so every room has a different name.</td><td>Use a plain name such as "Boardroom 3" for a real room.</td></tr>
+          <tr><td>Put the building's full name in the Building box, and the short form in the room name.</td><td>Put the floor in the Building box.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="module-intro">Capital letters do not matter when matching, and neither does the choice between a long dash and a hyphen. Everything else has to be the same.</p>
+  </section>
+
+  <!-- ================= 7. FIXING ================= -->
+  <section class="module" id="fix">
+    <div class="module-head">
+      <span class="dot" style="background:var(--rc-ink)"></span>
+      <h2>Fixing a name</h2>
+    </div>
+    <div class="flow">
+      <ol class="steps">
+        <li><div class="step-body"><strong>Open the room</strong><span>Find it on the Overview tab and click it.</span></div></li>
+        <li><div class="step-body"><strong>Press Edit Room Details</strong><span>Change the name (and the type, check frequency, access notes or lease details if needed) and save.</span></div></li>
+      </ol>
+      <div class="callout" style="background:var(--rc-soft);border:1px solid var(--rc-border)"><strong style="color:var(--rc-ink)">Renaming is safe</strong>The room's code follows the new name, and the code on its past checks and faults is updated with it, so the history stays attached to the room.</div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="module" id="faq">
+    <div class="module-head">
+      <span class="dot" style="background:var(--muted)"></span>
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Where do I find the device's display name?</summary><p class="a">It is the <em>Display name</em> column in the equipment export you upload on the Import tab. Copy it from there.</p></details>
+      <details><summary>The import says a row is "unmatched". What do I do?</summary><p class="a">Either the room does not exist yet (add it as above, or let the import propose creating it), or its name differs from the device's display name. Compare the two character by character, then fix the room's name with Edit Room Details.</p></details>
+      <details><summary>Can I use a name that does not follow the pattern?</summary><p class="a">Yes, the website accepts any name, and test rooms use plain names. But a real room with a different name will not be found by the import, so stick to the pattern for every real room.</p></details>
+      <details><summary>Can I delete a room I added by mistake?</summary><p class="a">Yes. Deactivate it first, then delete it from the deactivated rooms list. See "Deactivate, reactivate or delete a room" in the Help tab.</p></details>
+    </div>
+  </section>
+
+  <section class="module" id="help">
+    <div class="module-head">
+      <span class="dot" style="background:var(--muted)"></span>
+      <h2>Getting help</h2>
+    </div>
+    <p>If something still looks wrong, or you need someone added to the Estate Manager group, <strong>contact IT</strong> (tech@av-team.co.uk) and say which room and what you saw.</p>
+  </section>
+
+  <footer>
+    <a href="help.html">‹ Back to the main guide</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
